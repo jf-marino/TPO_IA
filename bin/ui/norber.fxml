@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="622.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NorberController">
+   <top>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <HBox>
+               <children>
+                  <Label text="Norberto" textFill="#3d9ddb">
+                     <font>
+                        <Font name="Microsoft JhengHei Light" size="24.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button defaultButton="true" mnemonicParsing="false" onAction="#reset" text="Reiniciar" textFill="WHITE" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <Separator minHeight="-Infinity" prefHeight="1.0" prefWidth="600.0" />
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </top>
+   <bottom>
+      <VBox prefHeight="2.0" prefWidth="742.0" BorderPane.alignment="CENTER">
+         <children>
+            <Separator prefWidth="200.0" />
+            <HBox>
+               <children>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button cancelButton="true" mnemonicParsing="false" onAction="#submit" text="Auxilio!" textAlignment="CENTER" textFill="#3d9ddb" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </bottom>
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox>
+               <children>
+                  <TitledPane collapsible="false" text="Datos Personales" textFill="#3d9ddb">
+                     <content>
+                        <VBox>
+                           <children>
+                              <HBox spacing="10.0">
+                                 <children>
+                                    <Label text="Edad" />
+                                    <ChoiceBox fx:id="edadChoiceBox" prefWidth="150.0" />
+                                 </children>
+                              </HBox>
+                              <HBox spacing="10.0">
+                                 <children>
+                                    <CheckBox fx:id="diabetesCheckBox" mnemonicParsing="false" text="Diabetes" />
+                                    <CheckBox fx:id="asmaCheckBox" mnemonicParsing="false" text="Asma" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox spacing="10.0">
+                                 <children>
+                                    <VBox spacing="5.0">
+                                       <children>
+                                          <CheckBox fx:id="alergiasCheckBox" mnemonicParsing="false" text="Alergias" />
+                                          <Label text="A que" />
+                                          <TextField fx:id="queAlergiasTextField" />
+                                       </children>
+                                    </VBox>
+                                    <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                    <VBox spacing="5.0">
+                                       <children>
+                                          <CheckBox fx:id="epilepsiaCheckBox" mnemonicParsing="false" text="Epilepsia" />
+                                          <Label text="Medicacion" />
+                                          <TextField fx:id="epilepsiaMedicacionTextField" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </TitledPane>
+                  <TitledPane text="Contexto" textFill="#3d9ddb">
+                     <content>
+                        <VBox>
+                           <children>
+                              <HBox spacing="20.0">
+                                 <children>
+                                    <CheckBox fx:id="conscienteCheckBox" mnemonicParsing="false" text="Consciente" />
+                                    <CheckBox fx:id="respiraCheckBox" mnemonicParsing="false" text="Respira" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <Separator prefWidth="200.0" />
+                              <HBox spacing="20.0">
+                                 <children>
+                                    <CheckBox fx:id="sangradoCheckBox" mnemonicParsing="false" text="Sangrado" />
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="Zona" />
+                                          <ChoiceBox fx:id="sangradoZonaChoiceBox" prefWidth="150.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="Tipo" />
+                                          <ChoiceBox fx:id="sangradoTipoChoiceBox" prefWidth="150.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="Cantidad" />
+                                          <TextField fx:id="sangradoCantidadTextField" promptText="Mucho, poco..." />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="Tamaño" />
+                                          <TextField fx:id="sangradoTamanioTextField" promptText="De la herida" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <Separator prefWidth="200.0" />
+                              <HBox spacing="20.0">
+                                 <children>
+                                    <CheckBox fx:id="traumaCheckBox" mnemonicParsing="false" text="Trauma" />
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="Zona" />
+                                          <ChoiceBox fx:id="traumaZonaChoiceBox" prefWidth="150.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="Tipo" />
+                                          <ChoiceBox fx:id="traumaTipoChoiceBox" prefWidth="150.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <Separator prefWidth="200.0" />
+                              <HBox spacing="20.0">
+                                 <children>
+                                    <CheckBox fx:id="quemaduraCheckBox" mnemonicParsing="false" text="Quemadura" />
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="Zona" />
+                                          <ChoiceBox fx:id="quemaduraZonaChoiceBox" prefWidth="150.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="Extension" />
+                                          <Slider fx:id="quemaduraExtensionSlider" blockIncrement="0.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="194.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="Profundidad" />
+                                          <Slider fx:id="quemaduraProfundidadSlider" blockIncrement="0.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="294.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <CheckBox fx:id="quemaduraDolorCheckBox" mnemonicParsing="false" text="Dolor" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <Separator prefWidth="200.0" />
+                              <HBox spacing="20.0">
+                                 <children>
+                                    <CheckBox fx:id="convulsionCheckBox" mnemonicParsing="false" text="Convulsion" />
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="Tiempo" />
+                                          <TextField fx:id="convulsionTiempoTextField" promptText="Duracion" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </TitledPane>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>
