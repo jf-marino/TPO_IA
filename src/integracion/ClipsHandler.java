@@ -1,6 +1,6 @@
 package integracion;
 
-import net.sf.clipsrules.jni.Environment;
+/*import net.sf.clipsrules.jni.Environment;
 import net.sf.clipsrules.jni.PrimitiveValue;
 
 public class ClipsHandler {
@@ -26,9 +26,6 @@ public class ClipsHandler {
 	public Metodologia run() {
 		this.clips.run();
 		
-		/**
-		 * Encontrar la respuesta de CLIPS
-		 */
 		PrimitiveValue respuesta = this.clips.eval("(find-all-facts (?val WTF) TRUE)");
 		
 		// TODO Hacer algo con la respuesta;
@@ -40,4 +37,4 @@ public class ClipsHandler {
 		return Metodologia.RCP;
 	}
 	
-}
+}*/

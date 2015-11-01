@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
@@ -8,19 +11,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="622.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NorberController">
+<BorderPane maxHeight="-Infinity" maxWidth="1200.0" minHeight="-Infinity" minWidth="1200.0" prefHeight="551.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NorberController">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
             <HBox>
                <children>
-                  <Label text="Norberto" textFill="#3d9ddb">
+                  <Label text="Primeros Auxilios" textFill="#3d9ddb">
                      <font>
                         <Font name="Microsoft JhengHei Light" size="24.0" />
                      </font>
                   </Label>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button defaultButton="true" mnemonicParsing="false" onAction="#reset" text="Reiniciar" textFill="WHITE" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -39,8 +41,9 @@
             <Separator prefWidth="200.0" />
             <HBox>
                <children>
+                  <Button fx:id="previousPaneButton" mnemonicParsing="false" onAction="#previous" text="Previous" />
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button cancelButton="true" mnemonicParsing="false" onAction="#submit" text="Auxilio!" textAlignment="CENTER" textFill="#3d9ddb" />
+                  <Button fx:id="nextPaneButton" mnemonicParsing="false" onAction="#next" text="Next" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -50,178 +53,346 @@
       </VBox>
    </bottom>
    <center>
-      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ScrollPane fx:id="mainScrollPane" fitToHeight="true" fitToWidth="true" maxWidth="1200.0" minWidth="1200.0" prefHeight="200.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
          <content>
-            <VBox>
+            <AnchorPane fx:id="rootAnchor" maxWidth="1200.0" minWidth="1200.0" prefWidth="1200.0">
                <children>
-                  <TitledPane collapsible="false" text="Datos Personales" textFill="#3d9ddb">
-                     <content>
-                        <VBox>
+                  <VBox fx:id="scenePane" maxWidth="1200.0" minWidth="1200.0" prefWidth="1200.0">
+                     <children>
+                        <Label text="Escena" textFill="#3d9ddb">
+                           <font>
+                              <Font name="Microsoft JhengHei Light" size="18.0" />
+                           </font>
+                        </Label>
+                        <Separator prefWidth="200.0" />
+                        <VBox spacing="20.0">
                            <children>
-                              <HBox spacing="10.0">
+                              <VBox>
                                  <children>
-                                    <Label text="Edad" />
-                                    <ChoiceBox fx:id="edadChoiceBox" prefWidth="150.0" />
+                                    <Label text="Cantidad de victimas" />
+                                    <ChoiceBox prefWidth="150.0" />
                                  </children>
-                              </HBox>
-                              <HBox spacing="10.0">
+                              </VBox>
+                              <VBox>
                                  <children>
-                                    <CheckBox fx:id="diabetesCheckBox" mnemonicParsing="false" text="Diabetes" />
-                                    <CheckBox fx:id="asmaCheckBox" mnemonicParsing="false" text="Asma" />
+                                    <CheckBox mnemonicParsing="false" text="Curioso presente" />
                                  </children>
-                                 <padding>
-                                    <Insets bottom="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                              </HBox>
-                              <HBox spacing="10.0">
+                              </VBox>
+                              <VBox>
                                  <children>
-                                    <VBox spacing="5.0">
-                                       <children>
-                                          <CheckBox fx:id="alergiasCheckBox" mnemonicParsing="false" text="Alergias" />
-                                          <Label text="A que" />
-                                          <TextField fx:id="queAlergiasTextField" />
-                                       </children>
-                                    </VBox>
-                                    <Separator orientation="VERTICAL" prefHeight="200.0" />
-                                    <VBox spacing="5.0">
-                                       <children>
-                                          <CheckBox fx:id="epilepsiaCheckBox" mnemonicParsing="false" text="Epilepsia" />
-                                          <Label text="Medicacion" />
-                                          <TextField fx:id="epilepsiaMedicacionTextField" />
-                                       </children>
-                                    </VBox>
+                                    <Label text="Seguridad" />
+                                    <ChoiceBox prefWidth="150.0" />
                                  </children>
-                                 <padding>
-                                    <Insets top="10.0" />
-                                 </padding>
-                              </HBox>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="Acceso a la victima" />
+                                    <ChoiceBox prefWidth="150.0" />
+                                 </children>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="DEA" />
+                                    <ChoiceBox prefWidth="150.0" />
+                                 </children>
+                              </VBox>
                            </children>
                         </VBox>
-                     </content>
-                  </TitledPane>
-                  <TitledPane text="Contexto" textFill="#3d9ddb">
-                     <content>
-                        <VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+                  <VBox fx:id="personalBackgroundPane" maxWidth="1200.0" minWidth="1200.0" prefWidth="1200.0" translateX="1200.0">
+                     <children>
+                        <Label text="Victima" textFill="#3d9ddb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Separator prefWidth="200.0" />
+                        <HBox spacing="200.0">
                            <children>
-                              <HBox spacing="20.0">
+                              <VBox spacing="20.0">
                                  <children>
-                                    <CheckBox fx:id="conscienteCheckBox" mnemonicParsing="false" text="Consciente" />
-                                    <CheckBox fx:id="respiraCheckBox" mnemonicParsing="false" text="Respira" />
+                                    <VBox>
+                                       <children>
+                                          <Label text="Edad" />
+                                          <ChoiceBox prefWidth="150.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <Label text="Posición" />
+                                          <ChoiceBox prefWidth="150.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <Label text="Conciencia" />
+                                          <ChoiceBox prefWidth="150.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <Label text="Respiración" />
+                                          <ChoiceBox prefWidth="150.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <Label text="Temperatura" />
+                                          <ChoiceBox prefWidth="150.0" />
+                                       </children>
+                                    </VBox>
+                                    <CheckBox mnemonicParsing="false" text="Epilepsia" />
                                  </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </HBox>
-                              <Separator prefWidth="200.0" />
-                              <HBox spacing="20.0">
+                              </VBox>
+                              <VBox spacing="20.0">
                                  <children>
-                                    <CheckBox fx:id="sangradoCheckBox" mnemonicParsing="false" text="Sangrado" />
-                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                    <VBox>
                                        <children>
-                                          <Label text="Zona" />
-                                          <ChoiceBox fx:id="sangradoZonaChoiceBox" prefWidth="150.0" />
+                                          <Label text="Obstrucción de vía aérea" />
+                                          <ChoiceBox prefWidth="150.0" />
                                        </children>
                                     </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                    <CheckBox mnemonicParsing="false" text="Comió" />
+                                    <CheckBox mnemonicParsing="false" text="Diabetes" />
+                                    <VBox>
                                        <children>
-                                          <Label text="Tipo" />
-                                          <ChoiceBox fx:id="sangradoTipoChoiceBox" prefWidth="150.0" />
+                                          <Label text="Insulino dependiente" />
+                                          <ChoiceBox prefWidth="150.0" />
                                        </children>
                                     </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0">
-                                       <children>
-                                          <Label text="Cantidad" />
-                                          <TextField fx:id="sangradoCantidadTextField" promptText="Mucho, poco..." />
-                                       </children>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0">
-                                       <children>
-                                          <Label text="Tamaño" />
-                                          <TextField fx:id="sangradoTamanioTextField" promptText="De la herida" />
-                                       </children>
-                                    </VBox>
+                                    <CheckBox mnemonicParsing="false" text="Crisis diabetica" />
                                  </children>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </HBox>
-                              <Separator prefWidth="200.0" />
-                              <HBox spacing="20.0">
-                                 <children>
-                                    <CheckBox fx:id="traumaCheckBox" mnemonicParsing="false" text="Trauma" />
-                                    <VBox prefHeight="200.0" prefWidth="100.0">
-                                       <children>
-                                          <Label text="Zona" />
-                                          <ChoiceBox fx:id="traumaZonaChoiceBox" prefWidth="150.0" />
-                                       </children>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0">
-                                       <children>
-                                          <Label text="Tipo" />
-                                          <ChoiceBox fx:id="traumaTipoChoiceBox" prefWidth="150.0" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </HBox>
-                              <Separator prefWidth="200.0" />
-                              <HBox spacing="20.0">
-                                 <children>
-                                    <CheckBox fx:id="quemaduraCheckBox" mnemonicParsing="false" text="Quemadura" />
-                                    <VBox prefHeight="200.0" prefWidth="100.0">
-                                       <children>
-                                          <Label text="Zona" />
-                                          <ChoiceBox fx:id="quemaduraZonaChoiceBox" prefWidth="150.0" />
-                                       </children>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0">
-                                       <children>
-                                          <Label text="Extension" />
-                                          <Slider fx:id="quemaduraExtensionSlider" blockIncrement="0.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-                                       </children>
-                                    </VBox>
-                                    <VBox layoutX="194.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
-                                       <children>
-                                          <Label text="Profundidad" />
-                                          <Slider fx:id="quemaduraProfundidadSlider" blockIncrement="0.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-                                       </children>
-                                    </VBox>
-                                    <VBox layoutX="294.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
-                                       <children>
-                                          <CheckBox fx:id="quemaduraDolorCheckBox" mnemonicParsing="false" text="Dolor" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </HBox>
-                              <Separator prefWidth="200.0" />
-                              <HBox spacing="20.0">
-                                 <children>
-                                    <CheckBox fx:id="convulsionCheckBox" mnemonicParsing="false" text="Convulsion" />
-                                    <VBox prefHeight="200.0" prefWidth="100.0">
-                                       <children>
-                                          <Label text="Tiempo" />
-                                          <TextField fx:id="convulsionTiempoTextField" promptText="Duracion" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </HBox>
+                              </VBox>
                            </children>
-                        </VBox>
-                     </content>
-                  </TitledPane>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+                  <VBox fx:id="woundsPane" layoutX="-2.0" layoutY="1.0" maxWidth="1200.0" minWidth="1200.0" prefWidth="1200.0" translateX="1200.0">
+                     <children>
+                        <Label text="Síntomas" textFill="#3d9ddb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Separator prefWidth="200.0" />
+                        <HBox spacing="50.0">
+                           <children>
+                              <VBox spacing="20.0">
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <Label text="Tipo y Ubicación" textFill="#3d9ddb" />
+                                          <Separator prefWidth="200.0" />
+                                          <VBox spacing="5.0">
+                                             <children>
+                                                <VBox />
+                                                <Label text="Tipo" />
+                                                <ChoiceBox prefWidth="150.0" />
+                                                <VBox />
+                                                <Label text="Ubicación" />
+                                                <ChoiceBox prefWidth="150.0" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="Lesión osteo-muscular" textFill="#3d9ddb" />
+                                          <Separator prefWidth="200.0" />
+                                          <VBox spacing="5.0">
+                                             <children>
+                                                <VBox>
+                                                   <children>
+                                                      <Label text="Clase de lesión osteo-muscular" />
+                                                      <ChoiceBox prefWidth="150.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox>
+                                                   <children>
+                                                      <Label text="Afección de las partes blandas" />
+                                                      <ChoiceBox prefWidth="150.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox>
+                                                   <children>
+                                                      <Label text="Afección de las partes oseas" />
+                                                      <ChoiceBox prefWidth="150.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox>
+                                                   <children>
+                                                      <Label text="Zona" />
+                                                      <ChoiceBox prefWidth="150.0" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="Quemadura" textFill="#3d9ddb" />
+                                    <Separator prefWidth="200.0" />
+                                    <VBox spacing="5.0">
+                                       <children>
+                                          <VBox>
+                                             <children>
+                                                <Label text="Profundidad" />
+                                                <ChoiceBox prefWidth="150.0" />
+                                             </children>
+                                          </VBox>
+                                          <CheckBox mnemonicParsing="false" text="Tejido necroso" />
+                                          <VBox>
+                                             <children>
+                                                <Label text="Dolor" />
+                                                <ChoiceBox prefWidth="150.0" />
+                                             </children>
+                                          </VBox>
+                                          <CheckBox mnemonicParsing="false" text="Inflamación" />
+                                          <VBox>
+                                             <children>
+                                                <Label text="Tamaño" />
+                                                <ChoiceBox prefWidth="150.0" />
+                                             </children>
+                                          </VBox>
+                                          <VBox>
+                                             <children>
+                                                <Label text="Tipo" />
+                                                <ChoiceBox prefWidth="150.0" />
+                                             </children>
+                                          </VBox>
+                                          <VBox>
+                                             <children>
+                                                <Label text="Zona" />
+                                                <ChoiceBox prefWidth="150.0" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <Label text="Sangrado" textFill="#3d9ddb" />
+                                          <Separator prefWidth="200.0" />
+                                          <VBox spacing="5.0">
+                                             <children>
+                                                <VBox>
+                                                   <children>
+                                                      <Label text="Clase de herida" />
+                                                      <ChoiceBox prefWidth="150.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox>
+                                                   <children>
+                                                      <Label text="Profundidad" />
+                                                      <ChoiceBox prefWidth="150.0" />
+                                                   </children>
+                                                </VBox>
+                                                <CheckBox mnemonicParsing="false" text="Objeto extraño" />
+                                                <VBox>
+                                                   <children>
+                                                      <Label text="Tamaño" />
+                                                      <ChoiceBox prefWidth="150.0" />
+                                                   </children>
+                                                </VBox>
+                                                <CheckBox mnemonicParsing="false" text="Amputación" />
+                                                <VBox>
+                                                   <children>
+                                                      <Label text="Tipo de sangrado" />
+                                                      <ChoiceBox prefWidth="150.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox>
+                                                   <children>
+                                                      <Label text="Zona" />
+                                                      <ChoiceBox prefWidth="150.0" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                              <VBox spacing="10.0">
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <Label text="Vía Aérea" textFill="#3d9ddb" />
+                                          <Separator prefWidth="200.0" />
+                                          <VBox spacing="5.0">
+                                             <children>
+                                                <VBox>
+                                                   <children>
+                                                      <Label text="Estado de la vía aérea" />
+                                                      <ChoiceBox prefWidth="150.0" />
+                                                   </children>
+                                                </VBox>
+                                                <CheckBox mnemonicParsing="false" text="Cianósis" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <Label text="Convulsion" textFill="#3d9ddb" />
+                                          <Separator prefWidth="200.0" />
+                                          <VBox spacing="5.0">
+                                             <children>
+                                                <VBox>
+                                                   <children>
+                                                      <Label text="Estado de la convulsion" />
+                                                      <ChoiceBox prefWidth="150.0" />
+                                                   </children>
+                                                </VBox>
+                                                <CheckBox mnemonicParsing="false" text="Epilepsia" />
+                                                <VBox>
+                                                   <children>
+                                                      <Label text="Duración" />
+                                                      <TextField />
+                                                   </children>
+                                                </VBox>
+                                                <CheckBox mnemonicParsing="false" text="Cíclica" />
+                                                <VBox>
+                                                   <children>
+                                                      <Label text="Medicación" />
+                                                      <ChoiceBox prefWidth="150.0" />
+                                                   </children>
+                                                </VBox>
+                                                <CheckBox mnemonicParsing="false" text="Fiebre" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
                </children>
-            </VBox>
+            </AnchorPane>
          </content>
       </ScrollPane>
    </center>

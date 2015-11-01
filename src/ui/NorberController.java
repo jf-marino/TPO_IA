@@ -5,89 +5,112 @@ import java.util.List;
 
 import estado.Edad;
 import estado.Estado;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 public class NorberController implements Initializable {
 	
 	private Estado estado;
+	private int showingPane = 0;
 	
-	/**
-	 * Datos Personales
-	 */
-	public ChoiceBox<String> edadChoiceBox;
-	public CheckBox diabetesCheckBox;
-	public CheckBox asmaCheckBox;
-	public CheckBox alergiasCheckBox;
-	public TextField queAlergiasTextField;
-	public CheckBox epilepsiaCheckBox;
-	public TextField epilepsiaMedicacionTextField;
-	
-	/**
-	 * Contexto
-	 */
-	public CheckBox conscienteCheckBox;
-	public CheckBox respiraCheckBox;
-	public CheckBox sangradoCheckBox;
-	public ChoiceBox<String> sangradoZonaChoiceBox;
-	public ChoiceBox<String> sangradoTipoChoiceBox;
-	public TextField sangradoCantidadTextField;
-	public TextField sangradoTamanioTextField;
-	public CheckBox traumaCheckBox;
-	public ChoiceBox<String> traumaZonaChoiceBox;
-	public ChoiceBox<String> traumaTipoChoiceBox;
-	public CheckBox quemaduraCheckBox;
-	public ChoiceBox<String> quemaduraZonaChoiceBox;
-	public Slider quemaduraExtensionSlider;
-	public Slider quemaduraProfundidadSlider;
-	public CheckBox quemaduraDolorCheckBox;
-	public CheckBox convulsionCheckBox;
-	public TextField convulsionTiempoTextField;
+	public ScrollPane mainScrollPane;
+	public AnchorPane rootAnchor;
+	public VBox scenePane;
+	public VBox personalBackgroundPane;
+	public VBox woundsPane;
 	
 	
 	@Override
 	public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
 		System.out.println("Inicializando a Norber...");
-		this.estado = Estado.instance();
-		
-		this.edadChoiceBox.setItems(FXCollections.observableArrayList(estado.getEdades()));
-		this.edadChoiceBox.getSelectionModel().select(0);
-		
-		this.sangradoZonaChoiceBox.setItems(FXCollections.observableArrayList(estado.getZonas()));
-		this.sangradoTipoChoiceBox.setItems(FXCollections.observableArrayList(estado.getSangrados()));
-		this.sangradoZonaChoiceBox.getSelectionModel().select(0);
-		this.sangradoTipoChoiceBox.getSelectionModel().select(0);
-		
-		this.traumaZonaChoiceBox.setItems(FXCollections.observableArrayList(estado.getZonas()));
-		this.traumaTipoChoiceBox.setItems(FXCollections.observableArrayList(estado.getTraumas()));
-		this.traumaZonaChoiceBox.getSelectionModel().select(0);
-		this.traumaTipoChoiceBox.getSelectionModel().select(0);
-		
-		this.quemaduraZonaChoiceBox.setItems(FXCollections.observableArrayList(estado.getZonas()));
-		this.quemaduraZonaChoiceBox.getSelectionModel().select(0);
+		System.out.println(mainScrollPane.getId());;
+		mainScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
 	}
 	
-	public void submit() {
-		System.out.println("Imprimiendo el estado");
-		System.out.println("edad");
-		System.out.println(this.edadChoiceBox.getSelectionModel().getSelectedItem());
-		System.out.println("diabetes");
-		System.out.println(this.diabetesCheckBox.isSelected());
-		System.out.println("asma");
-		System.out.println(this.asmaCheckBox.isSelected());
-		System.out.println("alergias");
-		System.out.println(this.alergiasCheckBox.isSelected());
-		System.out.println("a que");
-		System.out.println(this.queAlergiasTextField.getText());
-		System.out.println("epilepsia");
-		System.out.println(this.epilepsiaCheckBox.isSelected());
-		System.out.println("medicacion");
-		System.out.println(this.epilepsiaMedicacionTextField.getText());
+	private void slideLeft() {
+		TranslateTransition slideForScenePane = new TranslateTransition(Duration.seconds(1), scenePane);
+		TranslateTransition slideForPersonalBackgroundPane = new TranslateTransition(Duration.seconds(1), personalBackgroundPane);
+		TranslateTransition slideForWoundsPane = new TranslateTransition(Duration.seconds(1), woundsPane);
+		
+		// if on last pane do nothing
+		if(showingPane == 2) {
+			return;
+		}
+		
+		if(showingPane == 0) {
+			// show pane 1
+			slideForScenePane.setFromX(0);
+			slideForScenePane.setToX(-(rootAnchor.getWidth()));
+			slideForPersonalBackgroundPane.setFromX(rootAnchor.getWidth());
+			slideForPersonalBackgroundPane.setToX(0);
+			slideForScenePane.play();
+			slideForPersonalBackgroundPane.play();
+			this.showingPane = 1;
+		} else if(showingPane == 1) {
+			// show pane 2
+			slideForPersonalBackgroundPane.setFromX(0);
+			slideForPersonalBackgroundPane.setToX(-(rootAnchor.getWidth()));
+			slideForWoundsPane.setFromX(rootAnchor.getWidth());
+			slideForWoundsPane.setToX(0);
+			slideForPersonalBackgroundPane.play();
+			slideForWoundsPane.play();
+			this.showingPane = 2;
+		}
+		
+		/*
+		tt.setFromX( -(logoImage.getFitWidth()) );
+		tt.setToX( rootPane.getPrefWidth() );
+		tt.setCycleCount( Timeline.INDEFINITE );
+		tt.play();
+		*/
 	}
 	
-	public void reset() {
+	private void slideRight() {
+		TranslateTransition slideForScenePane = new TranslateTransition(Duration.seconds(1), scenePane);
+		TranslateTransition slideForPersonalBackgroundPane = new TranslateTransition(Duration.seconds(1), personalBackgroundPane);
+		TranslateTransition slideForWoundsPane = new TranslateTransition(Duration.seconds(1), woundsPane);
 		
+		// if on last pane do nothing
+		if(showingPane == 0) {
+			return;
+		}
+		
+		if(showingPane == 2) {
+			// show pane 1
+			slideForWoundsPane.setFromX(0);
+			slideForWoundsPane.setToX(rootAnchor.getWidth());
+			slideForPersonalBackgroundPane.setFromX(-(rootAnchor.getWidth()));
+			slideForPersonalBackgroundPane.setToX(0);
+			slideForWoundsPane.play();
+			slideForPersonalBackgroundPane.play();
+			this.showingPane = 1;
+		} else if(showingPane == 1) {
+			// show pane 0
+			slideForPersonalBackgroundPane.setFromX(0);
+			slideForPersonalBackgroundPane.setToX(rootAnchor.getWidth());
+			slideForScenePane.setFromX(-(rootAnchor.getWidth()));
+			slideForScenePane.setToX(0);
+			slideForPersonalBackgroundPane.play();
+			slideForScenePane.play();
+			this.showingPane = 0;
+		}
+	}
+	
+	@FXML
+	private void next() {
+		this.slideLeft();
+	}
+	
+	@FXML
+	private void previous() {
+		this.slideRight();
 	}
 
 }
