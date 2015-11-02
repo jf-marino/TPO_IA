@@ -10,6 +10,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import utils.NumericField?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="1200.0" minHeight="-Infinity" minWidth="1200.0" prefHeight="551.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NorberController">
    <top>
@@ -23,6 +24,7 @@
                      </font>
                   </Label>
                   <Region HBox.hgrow="ALWAYS" />
+                  <Button text="Reset" onAction="#reset"/>
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -70,30 +72,30 @@
                               <VBox>
                                  <children>
                                     <Label text="Cantidad de victimas" />
-                                    <ChoiceBox prefWidth="150.0" />
+                                    <NumericField fx:id="cantidadDeVictimasNumericField" prefWidth="150.0" />
                                  </children>
                               </VBox>
                               <VBox>
                                  <children>
-                                    <CheckBox mnemonicParsing="false" text="Curioso presente" />
+                                    <CheckBox fx:id="curiosoPresenteCheck" mnemonicParsing="false" text="Curioso presente" />
                                  </children>
                               </VBox>
                               <VBox>
                                  <children>
                                     <Label text="Seguridad" />
-                                    <ChoiceBox prefWidth="150.0" />
+                                    <ChoiceBox fx:id="seguridadChoice" prefWidth="150.0" />
                                  </children>
                               </VBox>
                               <VBox>
                                  <children>
                                     <Label text="Acceso a la victima" />
-                                    <ChoiceBox prefWidth="150.0" />
+                                    <ChoiceBox fx:id="accesoAVictimaChoice" prefWidth="150.0" />
                                  </children>
                               </VBox>
                               <VBox>
                                  <children>
                                     <Label text="DEA" />
-                                    <ChoiceBox prefWidth="150.0" />
+                                    <ChoiceBox fx:id="deaChoice" prefWidth="150.0" />
                                  </children>
                               </VBox>
                            </children>
@@ -118,34 +120,34 @@
                                     <VBox>
                                        <children>
                                           <Label text="Edad" />
-                                          <ChoiceBox prefWidth="150.0" />
+                                          <ChoiceBox fx:id="edadChoice" prefWidth="150.0" />
                                        </children>
                                     </VBox>
                                     <VBox>
                                        <children>
                                           <Label text="Posición" />
-                                          <ChoiceBox prefWidth="150.0" />
+                                          <ChoiceBox fx:id="posicionChoice" prefWidth="150.0" />
                                        </children>
                                     </VBox>
                                     <VBox>
                                        <children>
                                           <Label text="Conciencia" />
-                                          <ChoiceBox prefWidth="150.0" />
+                                          <ChoiceBox fx:id="concienciaChoice" prefWidth="150.0" />
                                        </children>
                                     </VBox>
                                     <VBox>
                                        <children>
                                           <Label text="Respiración" />
-                                          <ChoiceBox prefWidth="150.0" />
+                                          <ChoiceBox fx:id="respiracionChoice" prefWidth="150.0" />
                                        </children>
                                     </VBox>
                                     <VBox>
                                        <children>
                                           <Label text="Temperatura" />
-                                          <ChoiceBox prefWidth="150.0" />
+                                          <ChoiceBox fx:id="temperaturaChoice" prefWidth="150.0" />
                                        </children>
                                     </VBox>
-                                    <CheckBox mnemonicParsing="false" text="Epilepsia" />
+                                    <CheckBox fx:id="epilepsiaCheck" mnemonicParsing="false" text="Epilepsia" />
                                  </children>
                               </VBox>
                               <VBox spacing="20.0">
@@ -153,18 +155,18 @@
                                     <VBox>
                                        <children>
                                           <Label text="Obstrucción de vía aérea" />
-                                          <ChoiceBox prefWidth="150.0" />
+                                          <ChoiceBox fx:id="obstruccionViaAereaChoice" prefWidth="150.0" />
                                        </children>
                                     </VBox>
-                                    <CheckBox mnemonicParsing="false" text="Comió" />
-                                    <CheckBox mnemonicParsing="false" text="Diabetes" />
+                                    <CheckBox fx:id="comioCheck" mnemonicParsing="false" text="Comió" />
+                                    <CheckBox fx:id="diabetesCheck" mnemonicParsing="false" text="Diabetes" />
                                     <VBox>
                                        <children>
                                           <Label text="Insulino dependiente" />
-                                          <ChoiceBox prefWidth="150.0" />
+                                          <ChoiceBox fx:id="insulinoDependienteChoice" prefWidth="150.0" />
                                        </children>
                                     </VBox>
-                                    <CheckBox mnemonicParsing="false" text="Crisis diabetica" />
+                                    <CheckBox fx:id="crisisDiabeticaCheck" mnemonicParsing="false" text="Crisis diabetica" />
                                  </children>
                               </VBox>
                            </children>
@@ -194,10 +196,10 @@
                                              <children>
                                                 <VBox />
                                                 <Label text="Tipo" />
-                                                <ChoiceBox prefWidth="150.0" />
+                                                <ChoiceBox fx:id="tipoSintomaChoice" prefWidth="150.0" />
                                                 <VBox />
                                                 <Label text="Ubicación" />
-                                                <ChoiceBox prefWidth="150.0" />
+                                                <ChoiceBox fx:id="ubicacionSintomaChoice" prefWidth="150.0" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -211,25 +213,25 @@
                                                 <VBox>
                                                    <children>
                                                       <Label text="Clase de lesión osteo-muscular" />
-                                                      <ChoiceBox prefWidth="150.0" />
+                                                      <ChoiceBox fx:id="claseLesionOsteoMuscularChoice" prefWidth="150.0" />
                                                    </children>
                                                 </VBox>
                                                 <VBox>
                                                    <children>
                                                       <Label text="Afección de las partes blandas" />
-                                                      <ChoiceBox prefWidth="150.0" />
+                                                      <ChoiceBox fx:id="afeccionPartesBlandasChoice" prefWidth="150.0" />
                                                    </children>
                                                 </VBox>
                                                 <VBox>
                                                    <children>
                                                       <Label text="Afección de las partes oseas" />
-                                                      <ChoiceBox prefWidth="150.0" />
+                                                      <ChoiceBox fx:id="afeccionPartesOseasChoice" prefWidth="150.0" />
                                                    </children>
                                                 </VBox>
                                                 <VBox>
                                                    <children>
                                                       <Label text="Zona" />
-                                                      <ChoiceBox prefWidth="150.0" />
+                                                      <ChoiceBox fx:id="zonaLesionOsteoMuscularChoice" prefWidth="150.0" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -247,33 +249,33 @@
                                           <VBox>
                                              <children>
                                                 <Label text="Profundidad" />
-                                                <ChoiceBox prefWidth="150.0" />
+                                                <ChoiceBox fx:id="profundidadQuemaduraChoice" prefWidth="150.0" />
                                              </children>
                                           </VBox>
-                                          <CheckBox mnemonicParsing="false" text="Tejido necroso" />
+                                          <CheckBox fx:id="tejidoNecrosoCheck" mnemonicParsing="false" text="Tejido necroso" />
                                           <VBox>
                                              <children>
                                                 <Label text="Dolor" />
-                                                <ChoiceBox prefWidth="150.0" />
+                                                <ChoiceBox fx:id="dolorQuemaduraChoice" prefWidth="150.0" />
                                              </children>
                                           </VBox>
-                                          <CheckBox mnemonicParsing="false" text="Inflamación" />
+                                          <CheckBox fx:id="inflamacionCheck" mnemonicParsing="false" text="Inflamación" />
                                           <VBox>
                                              <children>
                                                 <Label text="Tamaño" />
-                                                <ChoiceBox prefWidth="150.0" />
+                                                <ChoiceBox fx:id="tamanioQuemaduraChoice" prefWidth="150.0" />
                                              </children>
                                           </VBox>
                                           <VBox>
                                              <children>
                                                 <Label text="Tipo" />
-                                                <ChoiceBox prefWidth="150.0" />
+                                                <ChoiceBox fx:id="tipoQuemaduraChoice" prefWidth="150.0" />
                                              </children>
                                           </VBox>
                                           <VBox>
                                              <children>
                                                 <Label text="Zona" />
-                                                <ChoiceBox prefWidth="150.0" />
+                                                <ChoiceBox fx:id="zonaQuemaduraChoice" prefWidth="150.0" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -291,33 +293,33 @@
                                                 <VBox>
                                                    <children>
                                                       <Label text="Clase de herida" />
-                                                      <ChoiceBox prefWidth="150.0" />
+                                                      <ChoiceBox fx:id="claseHeridaSangradoChoice" prefWidth="150.0" />
                                                    </children>
                                                 </VBox>
                                                 <VBox>
                                                    <children>
                                                       <Label text="Profundidad" />
-                                                      <ChoiceBox prefWidth="150.0" />
+                                                      <ChoiceBox fx:id="profundidadSangradoChoice" prefWidth="150.0" />
                                                    </children>
                                                 </VBox>
-                                                <CheckBox mnemonicParsing="false" text="Objeto extraño" />
+                                                <CheckBox fx:id="objetoExtranioSangradoCheck" mnemonicParsing="false" text="Objeto extraño" />
                                                 <VBox>
                                                    <children>
                                                       <Label text="Tamaño" />
-                                                      <ChoiceBox prefWidth="150.0" />
+                                                      <ChoiceBox fx:id="tamanioSangradoChoice" prefWidth="150.0" />
                                                    </children>
                                                 </VBox>
-                                                <CheckBox mnemonicParsing="false" text="Amputación" />
+                                                <CheckBox fx:id="amputacionSangradoCheck" mnemonicParsing="false" text="Amputación" />
                                                 <VBox>
                                                    <children>
                                                       <Label text="Tipo de sangrado" />
-                                                      <ChoiceBox prefWidth="150.0" />
+                                                      <ChoiceBox fx:id="tipoSangradoChoice" prefWidth="150.0" />
                                                    </children>
                                                 </VBox>
                                                 <VBox>
                                                    <children>
                                                       <Label text="Zona" />
-                                                      <ChoiceBox prefWidth="150.0" />
+                                                      <ChoiceBox fx:id="zonaSangradoChoice" prefWidth="150.0" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -337,10 +339,10 @@
                                                 <VBox>
                                                    <children>
                                                       <Label text="Estado de la vía aérea" />
-                                                      <ChoiceBox prefWidth="150.0" />
+                                                      <ChoiceBox fx:id="estadoViaAereaChoice" prefWidth="150.0" />
                                                    </children>
                                                 </VBox>
-                                                <CheckBox mnemonicParsing="false" text="Cianósis" />
+                                                <CheckBox fx:id="cianosisCheck" mnemonicParsing="false" text="Cianósis" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -354,24 +356,24 @@
                                                 <VBox>
                                                    <children>
                                                       <Label text="Estado de la convulsion" />
-                                                      <ChoiceBox prefWidth="150.0" />
+                                                      <ChoiceBox fx:id="estadoConvulsionChoice" prefWidth="150.0" />
                                                    </children>
                                                 </VBox>
-                                                <CheckBox mnemonicParsing="false" text="Epilepsia" />
+                                                <CheckBox fx:id="epilepsiaConvulsionCheck" mnemonicParsing="false" text="Epilepsia" />
                                                 <VBox>
                                                    <children>
                                                       <Label text="Duración" />
-                                                      <TextField />
+                                                      <NumericField fx:id="duracionConvulsionNumericField" />
                                                    </children>
                                                 </VBox>
-                                                <CheckBox mnemonicParsing="false" text="Cíclica" />
+                                                <CheckBox fx:id="ciclicaConvulsionCheck" mnemonicParsing="false" text="Cíclica" />
                                                 <VBox>
                                                    <children>
                                                       <Label text="Medicación" />
-                                                      <ChoiceBox prefWidth="150.0" />
+                                                      <ChoiceBox fx:id="medicacionConvulsionChoice" prefWidth="150.0" />
                                                    </children>
                                                 </VBox>
-                                                <CheckBox mnemonicParsing="false" text="Fiebre" />
+                                                <CheckBox fx:id="fiebreConvulsionCheck" mnemonicParsing="false" text="Fiebre" />
                                              </children>
                                           </VBox>
                                        </children>
