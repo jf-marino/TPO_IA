@@ -6,36 +6,34 @@ public class Translator {
 	
 	private static Translator instance;
 	
-	private String[] afeccionPartesOseas = {"fractura_expuesta", "fractura_cerrada"};
+	private String[] afeccionPartesOseas = {"fractura_cerrada", "fractura_expuesta"};
 	private String[] obstruccionViaAerea = {"habla", "tose", "no_respira"};
-	private String[] afeccionPartesBlandas = {"hematoma", "inflamacion", "no"};
+	private String[] afeccionPartesBlandas = {"no", "hematoma", "inflamacion"};
 	private String[] tipoSangrado = {"sin_sangrado_visible", "sangrado_lento", "sangrado_abundante", "sangrado_interno"};
-	private String[] medicacionConvulsion = {"tomo", "no_tomo", "no_usa"};
+	private String[] medicacionConvulsion = {"no_usa", "tomo", "no_tomo"};
 	private String[] estadoViaAerea = {"no_obstruida", "semi_obstruida", "obstruida"};
-	private String[] posicion = {"boca_abajo", "boca_arriba", "de_lado", "sentado", "parado", "posicion_lateral_de_seguridad"};
 	private String[] claseLesionOsteoMuscular = {"fractura", "fisura", "esguince", "calambre", "desgarro", "torcedura"};
 	private String[] conciencia = {"alerta", "responde_a_estimulo_verbal", "responde_a_estimulo_doloroso", "inconciente"};
-	private String[] tipoSintoma = {"quemadura", "lesion_osteo_articular", "obstruccion_via_aerea", "lesion_corto_punzante"};
-	private String[] zonaLesionOsteoMuscular = {"riesgosa", "no_riesgosa"};
+	private String[] tipoSintoma = {"ninguna", "obstruccion_via_aerea", "lesion_corto_punzante", "quemadura", "lesion_osteo_articular"};
+	private String[] zonaLesionOsteoMuscular = {"no_riesgosa", "riesgosa"};
 	private String[] tamanioQuemadura = {"pequenia", "media", "extensa"};
-	private String[] claseHeridaSangrado = {"cortante", "punzante", "laceracion", "contucion", "arma_de_fuego", "raspadura"};
+	private String[] claseHeridaSangrado = {"raspadura", "cortante", "punzante", "laceracion", "contucion", "arma_de_fuego"};
 	private String[] profundidadQuemadura = {"superficial", "profunda"};
-	private String[] estadoConvulsion = {"si", "no", "se_detuvo"};
+	private String[] estadoConvulsion = {"no", "si", "se_detuvo"};
 	private String[] profundidadSangrado = {"superficial", "moderado", "profundo"};
 	private String[] accesoVictima = {"facil", "dificil"};
 	private String[] dea = {"no_presente", "presente_cargado", "presente_descargado"};
-	private String[] ubicacionSintoma = {"piernas", "brazos", "torso", "espalda", "cabeza", "manos_o_pies", "genitales"};
+	private String[] ubicacionSintoma = {"no_tiene", "piernas", "brazos", "torso", "espalda", "cabeza", "manos_o_pies", "genitales"};
 	private String[] dolorQuemadura = {"indoloro", "dolor_leve", "dolor_grave", "dolor_moderado"};
-	private String[] zonaSangrado = {"riesgosa", "no_riesgosa"};
-	private String[] respiracion = {"no_respira", "respira_rapido", "respira_normal", "respira_lento"};
+	private String[] zonaSangrado = {"no_riesgosa", "riesgosa"};
+	private String[] respiracion = {"respira_normal", "no_respira", "respira_rapido", "respira_lento"};
 	private String[] seguridad = {"segura", "peligro_derrumbe", "olor_extranio", "transito", "humo", "fuego", "otro"};
 	private String[] tipoQuemadura = {"externa", "interna"};
 	private String[] tamanioSangrado = {"pequenia", "media", "extensa"};
-	private String[] temperatura = {"hipotermia", "normal", "hipertermia"};
-	private String[] zonaQuemadura = {"riesgosa", "no_riesgosa"};
-	private String[] insulinoDependiente = {"si_y_aplico_insulina", "si_y_no_aplico_insulina", "no"};
-	private String[] edad = {"bebe", "ninio", "adulto"};
-	//private String[] cantidadDeVictimas = {"1", "2"};
+	private String[] temperatura = {"normal", "hipotermia", "hipertermia"};
+	private String[] zonaQuemadura = {"no_riesgosa", "riesgosa"};
+	private String[] insulinoDependiente = {"no", "si_y_aplico_insulina", "si_y_no_aplico_insulina"};
+	private String[] edad = {"adulto", "bebe", "ninio"};
 	private String[] diabetes = {"si", "no"};
 	private String[] amputacionSangrado = {"si", "no"};
 	private String[] objetoExtranioSangrado = {"si", "no"};
@@ -49,7 +47,6 @@ public class Translator {
 	private String[] curiosoPresente = {"si", "no"};
 	private String[] ciclicaConvulsion = {"si", "no"};
 	private String[] cianosis = {"si", "no"};
-	//private String duracionConvulsion = "";
 	
 	
 	private Translator() {}
@@ -74,9 +71,8 @@ public class Translator {
 	
 	public String getVictimaFactString() {
 		AppState state = AppState.get();
-		return String.format("(assert (victima (edad %s) (posicion %s) (conciencia %s) (respiracion %s) (temperatura %s) (epilepsia %s) (obstruccion_via_aerea %s) (comio %s) (diabetes %s) (insulino_dependiente %s) (crisis_diabetica %s)))", 
+		return String.format("(assert (victima (edad %s) (conciencia %s) (respiracion %s) (temperatura %s) (epilepsia %s) (obstruccion_via_aerea %s) (comio %s) (diabetes %s) (insulino_dependiente %s) (crisis_diabetica %s)))", 
 				this.edad[state.edad],
-				this.posicion[state.posicion],
 				this.conciencia[state.conciencia],
 				this.respiracion[state.respiracion],
 				this.temperatura[state.temperatura],

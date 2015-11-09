@@ -17,7 +17,7 @@ public class Main extends Application {
 			Parent root = FXMLLoader.load(getClass().getResource("norber.fxml"));
 			Scene scene = new Scene(root,1200,600);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setTitle("Norberto");
+			primaryStage.setTitle("Primeros Auxilios");
 			primaryStage.setOnCloseRequest(e -> onClose());
 			primaryStage.setScene(scene);
 			primaryStage.show();

@@ -1,6 +1,7 @@
 package ui;
 
 import java.util.List;
+import java.util.Set;
 
 import integracion.AppState;
 import integracion.ClipsHandler;
@@ -26,6 +27,8 @@ public class NorberController implements Initializable {
 	
 	private ClipsHandler clips = ClipsHandler.get();
 	
+	private int showLesionPane = -1;
+	
 	@FXML
 	public ScrollPane mainScrollPane;
 	@FXML
@@ -36,55 +39,67 @@ public class NorberController implements Initializable {
 	public VBox personalBackgroundPane;
 	@FXML
 	public VBox woundsPane;
+	@FXML
+	public VBox airwayPane;
+	@FXML
+	public VBox bleedingPane;
+	@FXML
+	public VBox burnPane;
+	@FXML
+	public VBox musclePane;
+	
+	/**
+	 * Previous and next pane buttons
+	 */
+	@FXML
+	public Button nextPaneButton;
 	
 	/**
 	 * UI Controls
 	 */
 	
 	@FXML
-	public ChoiceBox afeccionPartesOseasChoice;
+	public ChoiceBox<String> afeccionPartesOseasChoice;
 	@FXML
-	public ChoiceBox obstruccionViaAereaChoice;
+	public ChoiceBox<String> obstruccionViaAereaChoice;
 	@FXML
 	public CheckBox diabetesCheck;
 	@FXML
 	public CheckBox amputacionSangradoCheck;
 	@FXML
-	public ChoiceBox afeccionPartesBlandasChoice;
+	public ChoiceBox<String> afeccionPartesBlandasChoice;
 	@FXML
-	public ChoiceBox tipoSangradoChoice;
+	public ChoiceBox<String> tipoSangradoChoice;
 	@FXML
 	public CheckBox objetoExtranioSangradoCheck;
 	@FXML
-	public ChoiceBox medicacionConvulsionChoice;
+	public ChoiceBox<String> medicacionConvulsionChoice;
 	@FXML
-	public ChoiceBox estadoViaAereaChoice;
+	public ChoiceBox<String> estadoViaAereaChoice;
 	@FXML
-	public NumericField duracionConvulsionNumericField;
+	public TextField duracionConvulsionNumericField;
 	@FXML
 	public CheckBox epilepsiaCheck;
 	@FXML
-	public ChoiceBox posicionChoice;
+	public ChoiceBox<String> claseLesionOsteoMuscularChoice;
 	@FXML
-	public ChoiceBox claseLesionOsteoMuscularChoice;
-	@FXML
-	public ChoiceBox concienciaChoice;
+	public ChoiceBox<String> concienciaChoice;
 	@FXML
 	public CheckBox crisisDiabeticaCheck;
 	@FXML
-	public ChoiceBox tipoSintomaChoice;
+	public ChoiceBox<String> tipoSintomaChoice;
 	@FXML
 	public CheckBox tejidoNecrosoCheck;
 	@FXML
-	public ChoiceBox zonaLesionOsteoMuscularChoice;
+	public ChoiceBox<String> zonaLesionOsteoMuscularChoice;
 	@FXML
-	public ChoiceBox tamanioQuemaduraChoice;
+	public ChoiceBox<String> tamanioQuemaduraChoice;
 	@FXML
-	public ChoiceBox claseHeridaSangradoChoice;
+	public ChoiceBox<String> claseHeridaSangradoChoice;
 	@FXML
-	public ChoiceBox profundidadQuemaduraChoice;
+	public ChoiceBox<String> profundidadQuemaduraChoice;
 	@FXML
-	public ChoiceBox estadoConvulsionChoice;
+	public ChoiceBox<String> estadoConvulsionChoice;
 	@FXML
 	public CheckBox fiebreConvulsionCheck;
 	@FXML
@@ -92,43 +107,43 @@ public class NorberController implements Initializable {
 	@FXML
 	public CheckBox comioCheck;
 	@FXML
-	public ChoiceBox profundidadSangradoChoice;
+	public ChoiceBox<String> profundidadSangradoChoice;
 	@FXML
-	public ChoiceBox accesoAVictimaChoice;
+	public ChoiceBox<String> accesoAVictimaChoice;
 	@FXML
-	public ChoiceBox deaChoice;
+	public ChoiceBox<String> deaChoice;
 	@FXML
-	public ChoiceBox ubicacionSintomaChoice;
+	public ChoiceBox<String> ubicacionSintomaChoice;
 	@FXML
-	public ChoiceBox dolorQuemaduraChoice;
+	public ChoiceBox<String> dolorQuemaduraChoice;
 	@FXML
-	public ChoiceBox zonaSangradoChoice;
+	public ChoiceBox<String> zonaSangradoChoice;
 	@FXML
 	public CheckBox inflamacionCheck;
 	@FXML
 	public CheckBox curiosoPresenteCheck;
 	@FXML
-	public ChoiceBox respiracionChoice;
+	public ChoiceBox<String> respiracionChoice;
 	@FXML
-	public ChoiceBox seguridadChoice;
+	public ChoiceBox<String> seguridadChoice;
 	@FXML
-	public ChoiceBox tipoQuemaduraChoice;
+	public ChoiceBox<String> tipoQuemaduraChoice;
 	@FXML
-	public ChoiceBox tamanioSangradoChoice;
+	public ChoiceBox<String> tamanioSangradoChoice;
 	@FXML
-	public ChoiceBox temperaturaChoice;
+	public ChoiceBox<String> temperaturaChoice;
 	@FXML
 	public CheckBox ciclicaConvulsionCheck;
 	@FXML
-	public ChoiceBox zonaQuemaduraChoice;
+	public ChoiceBox<String> zonaQuemaduraChoice;
 	@FXML
-	public ChoiceBox insulinoDependienteChoice;
+	public ChoiceBox<String> insulinoDependienteChoice;
 	@FXML
 	public CheckBox cianosisCheck;
 	@FXML
-	public ChoiceBox edadChoice;
+	public ChoiceBox<String> edadChoice;
 	@FXML
-	public NumericField cantidadDeVictimasNumericField;
+	public TextField cantidadDeVictimasNumericField;
 	
 	
 	
@@ -141,81 +156,154 @@ public class NorberController implements Initializable {
 		this.setDefaultValues();
 	}
 	
+	private void animatePanesLeft(VBox currentPane, VBox nextPane) {
+		TranslateTransition slideCurrent = new TranslateTransition(Duration.seconds(1), currentPane);
+		TranslateTransition slideNext = new TranslateTransition(Duration.seconds(1), nextPane);
+		
+		slideCurrent.setFromX(0);
+		slideCurrent.setToX(-(rootAnchor.getWidth()));
+		slideNext.setFromX(rootAnchor.getWidth());
+		slideNext.setToX(0);
+		slideCurrent.play();
+		slideNext.play();
+	}
+	
+	private void animatePanesRight(VBox currentPane, VBox nextPane) {
+		TranslateTransition slideCurrent = new TranslateTransition(Duration.seconds(1), currentPane);
+		TranslateTransition slideNext = new TranslateTransition(Duration.seconds(1), nextPane);
+		
+		slideCurrent.setFromX(0);
+		slideCurrent.setToX(rootAnchor.getWidth());
+		slideNext.setFromX(-(rootAnchor.getWidth()));
+		slideNext.setToX(0);
+		slideCurrent.play();
+		slideNext.play();
+	}
+	
 	private void slideLeft() {
-		TranslateTransition slideForScenePane = new TranslateTransition(Duration.seconds(1), scenePane);
-		TranslateTransition slideForPersonalBackgroundPane = new TranslateTransition(Duration.seconds(1), personalBackgroundPane);
-		TranslateTransition slideForWoundsPane = new TranslateTransition(Duration.seconds(1), woundsPane);
-		
-		// if on last pane do nothing
-		if(showingPane == 2) {
-			this.armarEstadoLesiones();
-			this.clips.runLesiones();
-			List<String> resultados = this.clips.resultadosLesiones();
-			this.openResultWindow(resultados);
-			
-			return;
+		Set<String> resultados;
+		switch(showingPane) {
+			case 0:
+				this.armarEstadoEscena();
+				this.clips.runEscena();
+				resultados = this.clips.resultadosEscena();
+				this.openResultWindow("Procedimiento", resultados);
+				// show pane 1
+				animatePanesLeft(scenePane, personalBackgroundPane);
+				this.showingPane = 1;
+				break;
+			case 1:
+				this.armarEstadoVictima();
+				this.armarEstadoConvulsion();
+				this.clips.runVictima();
+				resultados = this.clips.resultadosVictima();
+				this.openResultWindow("Diagnostico sobre la víctima", resultados);
+				// show pane 2
+				animatePanesLeft(personalBackgroundPane, woundsPane);
+				this.showingPane = 2;
+				break;
+			case 2:
+				int tipo = tipoSintomaChoice.getSelectionModel().getSelectedIndex();
+				this.showLesionPane = (tipo > 0) ? tipo : -1;
+				if(tipo > 0) {
+					this.armarEstadoLesion();
+					this.clips.runLesion();
+					resultados = this.clips.resultadosLesiones();
+					this.openResultWindow("Diagnostico sobre la lesíon", resultados);
+				}
+				switch(this.showLesionPane) {
+					case 1:
+						// show pane 3
+						animatePanesLeft(woundsPane, airwayPane);
+						this.showingPane = 3;
+						nextPaneButton.setText("Finalizar");
+						break;
+					case 2:
+						// show pane 4
+						animatePanesLeft(woundsPane, bleedingPane);
+						this.showingPane = 4;
+						nextPaneButton.setText("Finalizar");
+						break;
+					case 3:
+						// show pane 5
+						animatePanesLeft(woundsPane, burnPane);
+						this.showingPane = 5;
+						nextPaneButton.setText("Finalizar");
+						break;
+					case 4:
+						// show pane 6
+						animatePanesLeft(woundsPane, musclePane);
+						this.showingPane = 6;
+						nextPaneButton.setText("Finalizar");
+						break;
+				}
+				break;
+			case 3:
+				this.armarEstadoViaAerea();
+				this.clips.runViaAerea();
+				resultados = this.clips.resultadosViaAerea();
+				this.openResultWindow("Diagnostico sobre la vía aérea", resultados);
+				break;
+			case 4:
+				this.armarEstadoSangrado();
+				this.clips.runSangrado();
+				resultados = this.clips.resultadosSangrado();
+				this.openResultWindow("Diagnostico sobre el sangrado", resultados);
+				break;
+			case 5:
+				this.armarEstadoQuemadura();
+				this.clips.runQuemadura();
+				resultados = this.clips.resultadosQuemaduras();
+				this.openResultWindow("Diagnostico sobre quemaduras", resultados);
+				break;
+			case 6:
+				this.armarEstadoLesionOsteoMuscular();
+				this.clips.runLesionOsteoMuscular();
+				resultados = this.clips.resultadosLesionOsteoMuscular();
+				this.openResultWindow("Diagnostico sobre lesiones osteo-musculares", resultados);
+				break;
 		}
-		
-		if(showingPane == 0) {
-			this.armarEstadoEscena();
-			this.clips.runEscena();
-			List<String> resultados = this.clips.resultadosEscena();
-			this.openResultWindow(resultados);
-			
-			// show pane 1
-			slideForScenePane.setFromX(0);
-			slideForScenePane.setToX(-(rootAnchor.getWidth()));
-			slideForPersonalBackgroundPane.setFromX(rootAnchor.getWidth());
-			slideForPersonalBackgroundPane.setToX(0);
-			slideForScenePane.play();
-			slideForPersonalBackgroundPane.play();
-			this.showingPane = 1;
-		} else if(showingPane == 1) {
-			this.armarEstadoVictima();
-			this.clips.runVictima();
-			List<String> resultados = this.clips.resultadosVictima();
-			this.openResultWindow(resultados);
-			
-			// show pane 2
-			slideForPersonalBackgroundPane.setFromX(0);
-			slideForPersonalBackgroundPane.setToX(-(rootAnchor.getWidth()));
-			slideForWoundsPane.setFromX(rootAnchor.getWidth());
-			slideForWoundsPane.setToX(0);
-			slideForPersonalBackgroundPane.play();
-			slideForWoundsPane.play();
-			this.showingPane = 2;
-		}
-		
 	}
 	
 	private void slideRight() {
-		TranslateTransition slideForScenePane = new TranslateTransition(Duration.seconds(1), scenePane);
-		TranslateTransition slideForPersonalBackgroundPane = new TranslateTransition(Duration.seconds(1), personalBackgroundPane);
-		TranslateTransition slideForWoundsPane = new TranslateTransition(Duration.seconds(1), woundsPane);
-		
-		// if on last pane do nothing
-		if(showingPane == 0) {
-			return;
-		}
-		
-		if(showingPane == 2) {
-			// show pane 1
-			slideForWoundsPane.setFromX(0);
-			slideForWoundsPane.setToX(rootAnchor.getWidth());
-			slideForPersonalBackgroundPane.setFromX(-(rootAnchor.getWidth()));
-			slideForPersonalBackgroundPane.setToX(0);
-			slideForWoundsPane.play();
-			slideForPersonalBackgroundPane.play();
-			this.showingPane = 1;
-		} else if(showingPane == 1) {
-			// show pane 0
-			slideForPersonalBackgroundPane.setFromX(0);
-			slideForPersonalBackgroundPane.setToX(rootAnchor.getWidth());
-			slideForScenePane.setFromX(-(rootAnchor.getWidth()));
-			slideForScenePane.setToX(0);
-			slideForPersonalBackgroundPane.play();
-			slideForScenePane.play();
-			this.showingPane = 0;
+		switch(showingPane) {
+			case 0:
+				// if on first pane do nothing
+				break;
+			case 1:
+				// show pane 0
+				animatePanesRight(personalBackgroundPane, scenePane);
+				this.showingPane = 0;
+				break;
+			case 2:
+				// show pane 1
+				animatePanesRight(woundsPane, personalBackgroundPane);
+				this.showingPane = 1;
+				break;
+			case 3:
+				// show pane 2
+				animatePanesRight(airwayPane, woundsPane);
+				this.showingPane = 2;
+				this.showLesionPane = -1;
+				break;
+			case 4:
+				// show pane 3
+				animatePanesRight(bleedingPane, woundsPane);
+				this.showingPane = 2;
+				this.showLesionPane = -1;
+				break;
+			case 5:
+				// show pane 4
+				animatePanesRight(burnPane, woundsPane);
+				this.showingPane = 2;
+				this.showLesionPane = -1;
+				break;
+			case 6:
+				// show pane 5
+				animatePanesRight(musclePane, woundsPane);
+				this.showingPane = 2;
+				this.showLesionPane = -1;
+				break;
 		}
 	}
 	
@@ -230,36 +318,34 @@ public class NorberController implements Initializable {
 	}
 	
 	private void initializeValues() {
-		afeccionPartesOseasChoice.setItems(FXCollections.observableArrayList("Fractura expuesta", "Fractura cerrada"));
+		afeccionPartesOseasChoice.setItems(FXCollections.observableArrayList("Fractura cerrada", "Fractura expuesta"));
 		obstruccionViaAereaChoice.setItems(FXCollections.observableArrayList("Habla", "Tose", "No respira"));
-		afeccionPartesBlandasChoice.setItems(FXCollections.observableArrayList("Hematoma", "Inflamación", "No"));
+		afeccionPartesBlandasChoice.setItems(FXCollections.observableArrayList("No", "Hematoma", "Inflamación"));
 		tipoSangradoChoice.setItems(FXCollections.observableArrayList("Sin sangrado visible", "Sangrado lento (a gotas)", "Sangrado abundante", "Sangrado interno (moretón)"));
-		medicacionConvulsionChoice.setItems(FXCollections.observableArrayList("Tomo", "No tomo", "No usa"));
+		medicacionConvulsionChoice.setItems(FXCollections.observableArrayList("No usa", "Tomo", "No tomo"));
 		estadoViaAereaChoice.setItems(FXCollections.observableArrayList("No obstruida", "Semi-obstruida", "Obstruida"));
-		posicionChoice.setItems(FXCollections.observableArrayList("Boca abajo", "Boca arriba", "De lado", "Sentado", "Parado", "Posicion lateral de seguridad"));
 		claseLesionOsteoMuscularChoice.setItems(FXCollections.observableArrayList("Fractura", "Fisura", "Esguince", "Calambre", "Desgarro", "Torcedura"));
 		concienciaChoice.setItems(FXCollections.observableArrayList("Alerta", "Responde a estimulo verbal", "Responde a estimulo doloroso", "Inconciente"));
-		tipoSintomaChoice.setItems(FXCollections.observableArrayList("Quemadura", "Lesion osteo-articular", "Obstrucción de vía aérea", "Lesión corto-punzante"));
-		zonaLesionOsteoMuscularChoice.setItems(FXCollections.observableArrayList("Riesgosa", "No riesgosa"));
+		tipoSintomaChoice.setItems(FXCollections.observableArrayList("Ninguna", "Obstrucción de vía aérea", "Lesión corto-punzante", "Quemadura", "Lesion osteo-articular"));
+		zonaLesionOsteoMuscularChoice.setItems(FXCollections.observableArrayList("No riesgosa", "Riesgosa"));
 		tamanioQuemaduraChoice.setItems(FXCollections.observableArrayList("Pequeña", "Mediana", "Extensa"));
-		claseHeridaSangradoChoice.setItems(FXCollections.observableArrayList("Cortante", "Punzante", "Laceración", "Contunción", "Arma de fuego", "Raspadura"));
+		claseHeridaSangradoChoice.setItems(FXCollections.observableArrayList("Raspadura", "Cortante", "Punzante", "Laceración", "Contunción", "Arma de fuego"));
 		profundidadQuemaduraChoice.setItems(FXCollections.observableArrayList("Superficial", "Profunda"));
-		estadoConvulsionChoice.setItems(FXCollections.observableArrayList("Si", "No", "Se detuvo"));
+		estadoConvulsionChoice.setItems(FXCollections.observableArrayList("No", "Si", "Se detuvo"));
 		profundidadSangradoChoice.setItems(FXCollections.observableArrayList("Superficial", "Moderado", "Profundo"));
 		accesoAVictimaChoice.setItems(FXCollections.observableArrayList("Facil", "Dificil"));
 		deaChoice.setItems(FXCollections.observableArrayList("No presente", "Presente cargado", "Presente descargado"));
-		ubicacionSintomaChoice.setItems(FXCollections.observableArrayList("Piernas", "Brazos", "Torso", "Espalda", "Cabeza", "Manos o pies", "Genitales"));
+		ubicacionSintomaChoice.setItems(FXCollections.observableArrayList("No tiene", "Piernas", "Brazos", "Torso", "Espalda", "Cabeza", "Manos o pies", "Genitales"));
 		dolorQuemaduraChoice.setItems(FXCollections.observableArrayList("Indoloro", "Dolor leve", "Dolor grave", "Dolor moderado"));
-		zonaSangradoChoice.setItems(FXCollections.observableArrayList("Riesgosa", "No riesgosa"));
-		respiracionChoice.setItems(FXCollections.observableArrayList("No respira", "Respira rapido", "Respira normal", "Respira lento"));
+		zonaSangradoChoice.setItems(FXCollections.observableArrayList("No riesgosa", "Riesgosa"));
+		respiracionChoice.setItems(FXCollections.observableArrayList("Respira normal", "No respira", "Respira rapido", "Respira lento"));
 		seguridadChoice.setItems(FXCollections.observableArrayList("Segura", "Peligro de derrumbe", "Olor extraño", "Tránsito", "Humo", "Fuego", "Otro"));
 		tipoQuemaduraChoice.setItems(FXCollections.observableArrayList("Externa", "Interna"));
 		tamanioSangradoChoice.setItems(FXCollections.observableArrayList("Pequeña", "Media", "Extensa"));
-		temperaturaChoice.setItems(FXCollections.observableArrayList("Hipotermia", "Normal", "Hipertermia"));
-		zonaQuemaduraChoice.setItems(FXCollections.observableArrayList("Riesgosa", "No riesgosa"));
-		insulinoDependienteChoice.setItems(FXCollections.observableArrayList("Si y se aplicó insulina", "Si y no se aplicó insulina", "No"));
-		edadChoice.setItems(FXCollections.observableArrayList("Bebé (0 a 12 meses)", "Niño (1 a 8 años)", "Adulto (mayor a 8 años)"));
-		//cantidadDeVictimasChoice.setItems(FXCollections.observableArrayList("Una", "Mas de una"));
+		temperaturaChoice.setItems(FXCollections.observableArrayList("Normal", "Hipotermia", "Hipertermia"));
+		zonaQuemaduraChoice.setItems(FXCollections.observableArrayList("No riesgosa", "Riesgosa"));
+		insulinoDependienteChoice.setItems(FXCollections.observableArrayList("No", "Si y se aplicó insulina", "Si y no se aplicó insulina"));
+		edadChoice.setItems(FXCollections.observableArrayList("Adulto (mayor a 8 años)", "Bebé (0 a 12 meses)", "Niño (1 a 8 años)"));
 	}
 	
 	private void setDefaultValues() {
@@ -274,7 +360,6 @@ public class NorberController implements Initializable {
 		estadoViaAereaChoice.getSelectionModel().selectFirst();
 		duracionConvulsionNumericField.setText("0");
 		epilepsiaCheck.setSelected(false);
-		posicionChoice.getSelectionModel().selectFirst();
 		claseLesionOsteoMuscularChoice.getSelectionModel().selectFirst();
 		concienciaChoice.getSelectionModel().selectFirst();
 		crisisDiabeticaCheck.setSelected(false);
@@ -325,7 +410,6 @@ public class NorberController implements Initializable {
 	private void armarEstadoVictima() {
 		AppState state = AppState.get();
 		state.edad = this.edadChoice.getSelectionModel().getSelectedIndex();
-		state.posicion = this.posicionChoice.getSelectionModel().getSelectedIndex();
 		state.conciencia = this.concienciaChoice.getSelectionModel().getSelectedIndex();
 		state.respiracion = this.respiracionChoice.getSelectionModel().getSelectedIndex();
 		state.temperatura = this.temperaturaChoice.getSelectionModel().getSelectedIndex();
@@ -335,15 +419,6 @@ public class NorberController implements Initializable {
 		state.diabetes = $(this.diabetesCheck);
 		state.insulinoDependiente = this.insulinoDependienteChoice.getSelectionModel().getSelectedIndex();
 		state.crisisDiabetica = $(this.crisisDiabeticaCheck);
-	}
-	
-	private void armarEstadoLesiones() {
-		this.armarEstadoLesion();
-		this.armarEstadoQuemadura();
-		this.armarEstadoLesionOsteoMuscular();
-		this.armarEstadoViaAerea();
-		this.armarEstadoSangrado();
-		this.armarEstadoConvulsion();
 	}
 	
 	private void armarEstadoLesion() {
@@ -398,31 +473,59 @@ public class NorberController implements Initializable {
 		state.fiebreConvulsion = $(this.fiebreConvulsionCheck);
 	}
 	
-	private void openResultWindow(List<String> resultados) {
-		 try{
-	            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("results.fxml"));
-	            Parent root1 = (Parent) fxmlLoader.load();
-	            Stage stage = new Stage();
-	            stage.initModality(Modality.APPLICATION_MODAL);
-	            stage.setTitle("Resultados");
-	            stage.setScene(new Scene(root1));
-	            stage.show();
-	            
-	            ResultsController controller = fxmlLoader.<ResultsController>getController();
-	            controller.initData(resultados);
-	          } catch(Exception e) {
-	        	  e.printStackTrace();
-	          }
+	private void openResultWindow(String title, Set<String> resultados) {
+		if(resultados.size() > 0) {
+			try{
+	          FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("results.fxml"));
+	          Parent root1 = (Parent) fxmlLoader.load();
+	          Stage stage = new Stage();
+	          stage.initModality(Modality.APPLICATION_MODAL);
+	          stage.setTitle(title);
+	          stage.setScene(new Scene(root1));
+	          stage.show();
+	          
+	          ResultsController controller = fxmlLoader.<ResultsController>getController();
+	          controller.initData(resultados);
+	        } catch(Exception e) {
+	       	  e.printStackTrace();
+	        }
+		}
 	}
 	
-	public void reset() {
+	@FXML
+	private void reset() {
 		this.clips.reset();
 		AppState state = AppState.get();
 		state.reset();
 		this.setDefaultValues();
-		while(this.showingPane != 0) {
+		/*while(this.showingPane != 0) {
 			this.slideRight();
+		}*/
+		nextPaneButton.setText("Siguiente");
+		switch(this.showingPane) {
+			case 0: break;
+			case 1:
+				this.animatePanesRight(personalBackgroundPane, scenePane);
+				break;
+			case 2:
+				this.animatePanesRight(woundsPane, scenePane);
+				break;
+			case 3:
+				this.animatePanesRight(airwayPane, scenePane);
+				break;
+			case 4:
+				this.animatePanesRight(bleedingPane, scenePane);
+				break;
+			case 5:
+				this.animatePanesRight(burnPane, scenePane);
+				break;
+			case 6:
+				this.animatePanesRight(musclePane, scenePane);
+				break;
 		}
+		
+		this.showingPane = 0;
+		this.showLesionPane = -1;
 	}
 
 }
