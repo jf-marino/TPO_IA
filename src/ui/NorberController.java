@@ -204,6 +204,7 @@ public class NorberController implements Initializable {
 				break;
 			case 2:
 				int tipo = tipoSintomaChoice.getSelectionModel().getSelectedIndex();
+				int ubicacion = ubicacionSintomaChoice.getSelectionModel().getSelectedIndex();
 				this.showLesionPane = (tipo > 0) ? tipo : -1;
 				if(tipo > 0) {
 					this.armarEstadoLesion();
@@ -219,22 +220,34 @@ public class NorberController implements Initializable {
 						nextPaneButton.setText("Finalizar");
 						break;
 					case 2:
-						// show pane 4
-						animatePanesLeft(woundsPane, bleedingPane);
-						this.showingPane = 4;
-						nextPaneButton.setText("Finalizar");
+						if(ubicacion > 0) {
+							// show pane 4
+							animatePanesLeft(woundsPane, bleedingPane);
+							this.showingPane = 4;
+							nextPaneButton.setText("Finalizar");
+						} else {
+							this.openMessageWindow("¿Cual es la ubicación de la lesión corto-punzante?");
+						}
 						break;
 					case 3:
-						// show pane 5
-						animatePanesLeft(woundsPane, burnPane);
-						this.showingPane = 5;
-						nextPaneButton.setText("Finalizar");
+						if(ubicacion > 0) {
+							// show pane 5
+							animatePanesLeft(woundsPane, burnPane);
+							this.showingPane = 5;
+							nextPaneButton.setText("Finalizar");
+						} else {
+							this.openMessageWindow("¿Cual es la ubicación de la quemadura?");
+						}
 						break;
 					case 4:
-						// show pane 6
-						animatePanesLeft(woundsPane, musclePane);
-						this.showingPane = 6;
-						nextPaneButton.setText("Finalizar");
+						if(ubicacion > 0) {
+							// show pane 6
+							animatePanesLeft(woundsPane, musclePane);
+							this.showingPane = 6;
+							nextPaneButton.setText("Finalizar");
+						} else {
+							this.openMessageWindow("¿Cual es la ubicación de la lesión osteo-articular?");
+						}
 						break;
 				}
 				break;
@@ -326,7 +339,7 @@ public class NorberController implements Initializable {
 		estadoViaAereaChoice.setItems(FXCollections.observableArrayList("No obstruida", "Semi-obstruida", "Obstruida"));
 		claseLesionOsteoMuscularChoice.setItems(FXCollections.observableArrayList("Fractura", "Fisura", "Esguince", "Calambre", "Desgarro", "Torcedura"));
 		concienciaChoice.setItems(FXCollections.observableArrayList("Alerta", "Responde a estimulo verbal", "Responde a estimulo doloroso", "Inconciente"));
-		tipoSintomaChoice.setItems(FXCollections.observableArrayList("Ninguna", "Obstrucción de vía aérea", "Lesión corto-punzante", "Quemadura", "Lesion osteo-articular"));
+		tipoSintomaChoice.setItems(FXCollections.observableArrayList("Ninguna", "Obstrucción de vía aérea", "Lesión corto-punzante", "Quemadura", "Lesión osteo-articular"));
 		zonaLesionOsteoMuscularChoice.setItems(FXCollections.observableArrayList("No riesgosa", "Riesgosa"));
 		tamanioQuemaduraChoice.setItems(FXCollections.observableArrayList("Pequeña", "Mediana", "Extensa"));
 		claseHeridaSangradoChoice.setItems(FXCollections.observableArrayList("Raspadura", "Cortante", "Punzante", "Laceración", "Contunción", "Arma de fuego"));
@@ -490,6 +503,23 @@ public class NorberController implements Initializable {
 	       	  e.printStackTrace();
 	        }
 		}
+	}
+	
+	private void openMessageWindow(String message) {
+		try{
+	      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("message.fxml"));
+	      Parent root1 = (Parent) fxmlLoader.load();
+	      Stage stage = new Stage();
+	      stage.initModality(Modality.APPLICATION_MODAL);
+	      stage.setTitle("Información");
+	      stage.setScene(new Scene(root1));
+	      stage.show();
+	      
+	      MessageController controller = fxmlLoader.<MessageController>getController();
+	      controller.initData(message);
+	    } catch(Exception e) {
+	      e.printStackTrace();
+	    }
 	}
 	
 	@FXML

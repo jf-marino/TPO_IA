@@ -316,7 +316,7 @@
                                     <ChoiceBox fx:id="tipoSangradoChoice" prefWidth="150.0" />
                                  </children>
                               </VBox>
-                              <VBox>
+                              <VBox visible="false">
                                  <children>
                                     <Label text="Zona" />
                                     <ChoiceBox fx:id="zonaSangradoChoice" prefWidth="150.0" />
@@ -368,7 +368,7 @@
                                     <ChoiceBox fx:id="tipoQuemaduraChoice" prefWidth="150.0" />
                                  </children>
                               </VBox>
-                              <VBox>
+                              <VBox visible="false">
                                  <children>
                                     <Label text="Zona" />
                                     <ChoiceBox fx:id="zonaQuemaduraChoice" prefWidth="150.0" />
@@ -412,7 +412,7 @@
                                     <ChoiceBox fx:id="afeccionPartesOseasChoice" prefWidth="150.0" />
                                  </children>
                               </VBox>
-                              <VBox>
+                              <VBox visible="false">
                                  <children>
                                     <Label text="Zona" />
                                     <ChoiceBox fx:id="zonaLesionOsteoMuscularChoice" prefWidth="150.0" />

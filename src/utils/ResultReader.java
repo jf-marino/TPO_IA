@@ -5,9 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class ResultReader {
@@ -16,7 +14,7 @@ public class ResultReader {
 	public static Set<String> read(String filename) {
 		FileInputStream fstream;
 		//List<String> results = new ArrayList<String>();
-		Set<String> results = new HashSet<String>();
+		Set<String> results = new LinkedHashSet<String>();
 		try {
 			fstream = new FileInputStream(filename);
 			BufferedReader br = new BufferedReader(new InputStreamReader(fstream));

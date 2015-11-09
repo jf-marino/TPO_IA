@@ -32,7 +32,8 @@ public class ResultsController  implements Initializable {
         imageMap.put("14", "file:diagnosticos/14.Quemaduras Leves.jpg");
         imageMap.put("15", "file:diagnosticos/15.Quemaduras Externas y graves.jpg");
         imageMap.put("16", "file:diagnosticos/16.Lesiones en huesos musculos y articulaciones.jpg");
-        imageMap.put("17", "file:diagnosticos/17.Vendajes.jpg");
+        imageMap.put("17a", "file:diagnosticos/17. Vendaje Compresivo.jpg");
+        imageMap.put("17b", "file:diagnosticos/17. Vendaje Recurrente.jpg");
         imageMap.put("18", "file:diagnosticos/18.Convulsiones.jpg");
         imageMap.put("19", "file:diagnosticos/19.Diabetes.jpg");
         imageMap.put("20", "file:diagnosticos/20.Hipotermia.jpg");
