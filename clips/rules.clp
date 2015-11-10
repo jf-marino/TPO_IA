@@ -66,8 +66,7 @@
 (defrule MAIN::escena_1
    (escena (cantidad_victimas ?x&:(> ?x 1)))
    =>
-   ; TODO
-   (printout escenaTarget "" crlf))
+   (printout escenaTarget "22" crlf))
 
 (defrule MAIN::escena_2
    (or  (escena (seguridad peligro_derrumbe))
@@ -78,8 +77,7 @@
 (defrule MAIN::escena_3
    (escena (seguridad transito))
    =>
-   ; TODO
-   (printout escenaTarget "" crlf))
+   (printout escenaTarget "23" crlf))
 
 (defrule MAIN::escena_4
    (and (or  (escena (seguridad humo))
@@ -98,7 +96,7 @@
 (defrule MAIN::escena_6
    (escena (seguridad segura))
    =>
-   (printout escenaTarget "" crlf))
+   (printout escenaTarget "1" crlf))
 
    
    
@@ -279,8 +277,7 @@
 	(convulsion (estado se_detuvo) (fiebre si))
 	(victima (edad ninio))
 	=>
-	; TODO
-	(printout victimaTarget "" crlf))
+	(printout victimaTarget "24" crlf))
 
 
 (defrule MAIN::convulsion_5
@@ -318,8 +315,7 @@
 	(via_aerea (estado semi_obstruida))
 	(victima (edad adulto|ninio))
 	=>
-	; TODO
-	(printout viaAereaTarget "" crlf))
+	(printout viaAereaTarget "25" crlf))
 
 
 (defrule MAIN::via_aerea_2
@@ -390,78 +386,69 @@
 (defrule MAIN::sangrado_1
 	(sangrado (clase_herida ?x) (amputacion si))
 	=>
-	; TODO media 17 ¿?
-	(printout sangradoTarget "17" crlf))
+	(printout sangradoTarget "17a" crlf))
 
 
 (defrule MAIN::sangrado_2
 	(sangrado (clase_herida arma_de_fuego))
 	(zona riesgosa)
 	=>
-	; TODO
-	(printout sangradoTarget "" crlf))
+	(printout sangradoTarget "28" crlf)
+	(printout sangradoTarget "29" crlf))
 
 
 (defrule MAIN::sangrado_3
 	(sangrado (clase_herida arma_de_fuego) (tipo sangrado_lento))
 	(zona no_riesgosa)
 	=>
-	; TODO
-	(printout sangradoTarget "" crlf))
+	(printout sangradoTarget "30" crlf))
 
 
 (defrule MAIN::sangrado_4
 	(sangrado (clase_herida laceracion) (profundidad profundo|moderado) (objeto_extranio no) (tamanio media|extensa))
 	=>
-	; TODO media 17 ¿?
-	(printout sangradoTarget "17" crlf))
+	(printout sangradoTarget "17a" crlf))
 
 
 (defrule MAIN::sangrado_5
 	(sangrado (clase_herida laceracion) (profundidad superficial) (tamanio pequenia) (objeto_extranio no))
 	(zona no_riesgosa)
 	=>
-	; TODO media 17 ¿?
-	(printout sangradoTarget "17" crlf))
+	(printout sangradoTarget "17a" crlf))
 
 
 (defrule MAIN::sangrado_6
 	(sangrado (clase_herida laceracion) (profundidad moderado|profundo) (tamanio pequenia) (objeto_extranio no))
 	(zona riesgosa)
 	=>
-	; TODO media 17 ¿?
-	(printout sangradoTarget "17" crlf))
+	(printout sangradoTarget "17a" crlf))
 
 
 (defrule MAIN::sangrado_7
 	(sangrado (clase_herida laceracion) (objeto_extranio no))
 	=>
-	; TODO media 17 ¿?
-	(printout sangradoTarget "17" crlf))
+	(printout sangradoTarget "17a" crlf))
 
 
 (defrule MAIN::sangrado_8
 	(sangrado (clase_herida punzante) (tamanio media) (tipo sangrado_interno|sin_sangrado_visible) (objeto_extranio si))
 	(zona riesgosa)
 	=>
-	; TODO
-	(printout sangradoTarget "" crlf))
+	(printout sangradoTarget "27" crlf))
 
 
 (defrule MAIN::sangrado_9
 	(sangrado (clase_herida punzante) (tamanio pequenia) (tipo sangrado_interno|sin_sangrado_visible) (objeto_extranio si))
 	(zona no_riesgosa)
 	=>
-	; TODO
-	(printout sangradoTarget "" crlf))
+	(printout sangradoTarget "27" crlf))
 
 
 (defrule MAIN::sangrado_10
 	(sangrado (clase_herida punzante) (tamanio pequenia) (tipo sangrado_interno|sin_sangrado_visible) (objeto_extranio si))
 	(zona riesgosa)
 	=>
-	; TODO
-	(printout sangradoTarget "" crlf))
+	(printout sangradoTarget "27" crlf))
 
 
 (defrule MAIN::sangrado_11
@@ -533,16 +520,14 @@
 	(sangrado (clase_herida contucion) (tipo sin_sangrado_visible) (tamanio extensa))
 	(zona riesgosa)
 	=>
-	; TODO
-	(printout sangradoTarget "" crlf))
+	(printout sangradoTarget "1" crlf))
 
 
 (defrule MAIN::sangrado_22
 	(sangrado (clase_herida contucion) (tipo sin_sangrado_visible) (tamanio extensa))
 	(zona no_riesgosa)
 	=>
-	; TODO
-	(printout sangradoTarget "" crlf))
+	(printout sangradoTarget "1" crlf))
 	
 	
 	
@@ -565,8 +550,7 @@
 	(lesion (tipo quemadura))
 	(quemadura (tipo externa) (tejido_necroso si))
 	=>
-	; TODO
-	(printout quemadurasTarget "" crlf))
+	(printout quemadurasTarget "15" crlf))
 
 
 (defrule MAIN::quemadura_3
@@ -582,8 +566,7 @@
 	(quemadura (tipo externa) (tejido_necroso no) (tamanio extensa) (profundidad profunda) (dolor indoloro))
 	(zona riesgosa)
 	=>
-	; TODO
-	(printout quemadurasTarget "" crlf))
+	(printout quemadurasTarget "15" crlf))
 
 
 (defrule MAIN::quemadura_5
@@ -591,16 +574,14 @@
 	(quemadura (tipo externa) (tejido_necroso no) (tamanio extensa) (profundidad profunda) (dolor indoloro))
 	(zona no_riesgosa)
 	=>
-	; TODO
-	(printout quemadurasTarget "" crlf))
+	(printout quemadurasTarget "14" crlf))
 
 
 (defrule MAIN::quemadura_6
 	(lesion (tipo quemadura))
 	(quemadura (tipo externa) (tejido_necroso no) (tamanio media|pequenia) (profundidad profunda) (dolor indoloro))
 	=>
-	; TODO
-	(printout quemadurasTarget "" crlf))
+	(printout quemadurasTarget "15" crlf))
 
 
 (defrule MAIN::quemadura_7
@@ -608,8 +589,7 @@
 	(quemadura (tipo externa) (tejido_necroso no) (tamanio extensa) (profundidad superficial) (dolor dolor_grave))
 	(zona riesgosa)
 	=>
-	; TODO
-	(printout quemadurasTarget "" crlf))
+	(printout quemadurasTarget "14" crlf))
 
 
 (defrule MAIN::quemadura_8
@@ -617,16 +597,14 @@
 	(quemadura (tamanio extensa) (tipo externa) (profundidad superficial) (tejido_necroso no) (dolor dolor_grave))
 	(zona no_riesgosa)
 	=>
-	; TODO
-	(printout quemadurasTarget "" crlf))
+	(printout quemadurasTarget "14" crlf))
 
 
 (defrule MAIN::quemadura_9
 	(lesion (tipo quemadura))
 	(quemadura (tamanio media|pequenia) (tipo externa) (profundidad superficial) (tejido_necroso no) (dolor dolor_moderado))
 	=>
-	; TODO
-	(printout quemadurasTarget "" crlf))
+	(printout quemadurasTarget "14" crlf))
 	
 	
 	
