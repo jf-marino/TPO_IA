@@ -26,7 +26,7 @@ public class ResultsController  implements Initializable {
         imageMap.put("8", "file:diagnosticos/08.Obstruccion via aerea Total Bebes.jpg");
         imageMap.put("9", "file:diagnosticos/09.Obstruccion via aerea Parcial Adultos.jpg");
         imageMap.put("10", "file:diagnosticos/10.Obstruccion via aerea Parcial Niños.jpg");
-        imageMap.put("11", "file:diagnosticos/");
+        imageMap.put("11", "file:diagnosticos/11. Obstruccion via aerea Parcial Bebe.jpg");
         imageMap.put("12", "file:diagnosticos/12.Hemorragias.jpg");
         imageMap.put("13", "file:diagnosticos/13.Raspaduras y Heridas cortantes.jpg");
         imageMap.put("14", "file:diagnosticos/14.Quemaduras Leves.jpg");
@@ -41,12 +41,17 @@ public class ResultsController  implements Initializable {
         imageMap.put("22", "file:diagnosticos/22. Triage.jpg");
         imageMap.put("23", "file:diagnosticos/23. Asegurar escena por transito.jpg");
         imageMap.put("24", "file:diagnosticos/24. Bajar temperatura chicos convulsiones.jpg");
-        imageMap.put("25", "file:diagnosticos/25. Via aerea semiobstruida bebe.jpg");
+        imageMap.put("25", "file:diagnosticos/25. Aplicar Hielo.jpg");
         imageMap.put("26", "file:diagnosticos/26. Recuperar parte y ponerla en hielo.jpg");
         imageMap.put("27", "file:diagnosticos/27. Fijar Objeto.jpg");
         imageMap.put("28", "file:diagnosticos/28. Herida de arma de fuego en zona riesgosa.jpg");
         imageMap.put("29", "file:diagnosticos/29. Herida de bala Instrucciones para ciertas regiones del cuerpo.jpg");
         imageMap.put("30", "file:diagnosticos/30. Herida de arma de fuego en zona no riesgosa.jpg");
+        imageMap.put("31", "file:diagnosticos/31. Controlar herida.jpg");
+        imageMap.put("32", "file:diagnosticos/32. Controlar signos vitales.jpg");
+        imageMap.put("33", "file:diagnosticos/33. Controlar sangrado.jpg");
+        imageMap.put("34", "file:diagnosticos/34. Inmovilizar zona.jpg");
+        imageMap.put("35", "file:diagnosticos/35. Elongar musculo y hacer masajes.jpg");
     }
 
 	@FXML

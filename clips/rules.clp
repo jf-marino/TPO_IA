@@ -311,18 +311,11 @@
 	=>
 	(printout viaAereaTarget "10" crlf))
 
-(defrule MAIN::via_aerea_1
-	(via_aerea (estado semi_obstruida))
-	(victima (edad adulto|ninio))
-	=>
-	(printout viaAereaTarget "25" crlf))
-
-
 (defrule MAIN::via_aerea_2
 	(via_aerea (estado semi_obstruida))
 	(victima (edad bebe))
 	=>
-	(printout lesionesTarget "Estimular al bebé a toser" crlf))
+	(printout viaAereaTarget "11" crlf))
 
 
 (defrule MAIN::via_aerea_3
@@ -386,6 +379,7 @@
 (defrule MAIN::sangrado_1
 	(sangrado (clase_herida ?x) (amputacion si))
 	=>
+	(printout sangradoTarget "33" crlf)
 	(printout sangradoTarget "17a" crlf))
 
 
@@ -401,12 +395,14 @@
 	(sangrado (clase_herida arma_de_fuego) (tipo sangrado_lento))
 	(zona no_riesgosa)
 	=>
-	(printout sangradoTarget "30" crlf))
+	(printout sangradoTarget "30" crlf)
+	(printout sangradoTarget "29" crlf))
 
 
 (defrule MAIN::sangrado_4
 	(sangrado (clase_herida laceracion) (profundidad profundo|moderado) (objeto_extranio no) (tamanio media|extensa))
 	=>
+	(printout sangradoTarget "33" crlf)
 	(printout sangradoTarget "17a" crlf))
 
 
@@ -427,6 +423,8 @@
 (defrule MAIN::sangrado_7
 	(sangrado (clase_herida laceracion) (objeto_extranio no))
 	=>
+	(printout sangradoTarget "27" crlf)
+	(printout sangradoTarget "33" crlf)
 	(printout sangradoTarget "17a" crlf))
 
 
@@ -467,6 +465,7 @@
 	(sangrado (clase_herida cortante) (profundidad profundo) (tipo sangrado_abundante) (objeto_extranio no) (tamanio media|extensa))
 	(zona riesgosa)
 	=>
+	(printout sangradoTarget "33" crlf)
 	(printout sangradoTarget "13" crlf))
 
 
@@ -474,14 +473,14 @@
 	(sangrado (clase_herida cortante) (profundidad profundo) (tipo sangrado_abundante) (objeto_extranio no) (tamanio media|extensa))
 	(zona no_riesgosa)
 	=>
-	(printout sangradoTarget "13" crlf)
+	(printout sangradoTarget "33" crlf)
 	(printout sangradoTarget "17" crlf))
 
 
 (defrule MAIN::sangrado_15
-	(sangrado (clase_herida cortante) (profundidad profundo) (tipo sangrado_abundante) (objeto_extranio no) (tamanio pequenia))
+	(sangrado (clase_herida cortante) (profundidad moderado|profundo) (tipo sangrado_abundante) (objeto_extranio no) (tamanio pequenia))
 	=>
-	(printout sangradoTarget "13" crlf))
+	(printout sangradoTarget "33" crlf))
 
 
 (defrule MAIN::sangrado_16
@@ -510,10 +509,10 @@
 
 
 (defrule MAIN::sangrado_20
-	(sangrado (clase_herida contucion) (tipo sin_sangrado_visible) (tamanio pequenia))
+	(sangrado (clase_herida contucion) (tipo sin_sangrado_visible) (tamanio pequenia|media))
 	=>
-	; TODO
-	(printout sangradoTarget "" crlf))
+	(printout sangradoTarget "25" crlf)
+	(printout sangradoTarget "31" crlf))
 
 
 (defrule MAIN::sangrado_21
@@ -542,8 +541,7 @@
 	(lesion (tipo quemadura))
 	(quemadura (inflamacion si))
 	=>
-	; TODO
-	(printout quemadurasTarget "" crlf))
+	(printout quemadurasTarget "25" crlf))
 
 
 (defrule MAIN::quemadura_2
@@ -557,8 +555,7 @@
 	(lesion (tipo quemadura))
 	(quemadura (tipo interna))
 	=>
-	; TODO
-	(printout quemadurasTarget "" crlf))
+	(printout quemadurasTarget "32" crlf))
 
 
 (defrule MAIN::quemadura_4
@@ -617,63 +614,62 @@
 	(lesion_osteo_muscular (clase fractura) (afeccion_partes_blandas inflamacion) (afeccion_partes_oseas fractura_expuesta))
 	(zona no_riesgosa)
 	=>
-	; TODO
-	(printout lesionOsteoMuscularTarget "" crlf))
+	(printout lesionOsteoMuscularTarget "33" crlf)
+	(printout lesionOsteoMuscularTarget "34" crlf))
 
 
 (defrule MAIN::lesion_osteo_muscular_2
 	(lesion_osteo_muscular (clase fractura) (afeccion_partes_oseas fractura_cerrada))
 	(zona riesgosa)
 	=>
-	; TODO
-	(printout lesionOsteoMuscularTarget "" crlf))
+	(printout lesionOsteoMuscularTarget "1" crlf)
+	(printout lesionOsteoMuscularTarget "34" crlf))
 
 
 (defrule MAIN::lesion_osteo_muscular_3
 	(lesion_osteo_muscular (clase fractura) (afeccion_partes_oseas fractura_cerrada) (afeccion_partes_blandas inflamacion))
 	(zona riesgosa)
 	=>
-	; TODO
-	(printout lesionOsteoMuscularTarget "" crlf))
+	(printout lesionOsteoMuscularTarget "34" crlf))
 
 
 (defrule MAIN::lesion_osteo_muscular_4
 	(lesion_osteo_muscular (clase fisura|esguince) (afeccion_partes_oseas fractura_cerrada) (afeccion_partes_blandas inflamacion))
 	(zona no_riesgosa)
 	=>
-	; TODO
-	(printout lesionOsteoMuscularTarget "" crlf))
+	(printout lesionOsteoMuscularTarget "25" crlf)
+	(printout lesionOsteoMuscularTarget "34" crlf))
 
 
 (defrule MAIN::lesion_osteo_muscular_5
 	(lesion_osteo_muscular (clase fisura|esguince) (afeccion_partes_oseas fractura_cerrada) (afeccion_partes_blandas inflamacion))
 	(zona riesgosa)
 	=>
-	; TODO
-	(printout lesionOsteoMuscularTarget "" crlf))
+	(printout lesionOsteoMuscularTarget "25" crlf)
+	(printout lesionOsteoMuscularTarget "34" crlf)
+	(printout lesionOsteoMuscularTarget "1" crlf))
 
 
 (defrule MAIN::lesion_osteo_muscular_6
 	(lesion_osteo_muscular (clase fisura|esguince) (afeccion_partes_oseas fractura_cerrada) (afeccion_partes_blandas no))
 	(zona riesgosa)
 	=>
-	; TODO
-	(printout lesionOsteoMuscularTarget "" crlf))
+	(printout lesionOsteoMuscularTarget "34" crlf)
+	(printout lesionOsteoMuscularTarget "1" crlf))
 
 
 (defrule MAIN::lesion_osteo_muscular_7
 	(lesion_osteo_muscular (clase desgarro|torcedura) (afeccion_partes_oseas fractura_cerrada) (afeccion_partes_blandas inflamacion))
 	(zona no_riesgosa)
 	=>
-	; TODO
-	(printout lesionOsteoMuscularTarget "" crlf))
+	(printout lesionOsteoMuscularTarget "25" crlf)
+	(printout lesionOsteoMuscularTarget "34" crlf))
 
 
 (defrule MAIN::lesion_osteo_muscular_8
 	(lesion_osteo_muscular (clase calambre))
 	=>
-	; TODO
-	(printout lesionOsteoMuscularTarget "" crlf))
+	(printout lesionOsteoMuscularTarget "35" crlf))
 
 
 
