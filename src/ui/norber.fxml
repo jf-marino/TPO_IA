@@ -53,11 +53,11 @@
       </VBox>
    </bottom>
    <center>
-      <ScrollPane fx:id="mainScrollPane" fitToHeight="true" fitToWidth="true" maxWidth="1200.0" minWidth="1200.0" prefHeight="200.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+      <ScrollPane fx:id="mainScrollPane" fitToHeight="true" fitToWidth="true" prefHeight="200.0" BorderPane.alignment="CENTER">
          <content>
-            <AnchorPane fx:id="rootAnchor" maxWidth="1200.0" minWidth="1200.0" prefWidth="1200.0">
+            <AnchorPane fx:id="rootAnchor" minWidth="1000.0">
                <children>
-                  <VBox fx:id="scenePane" maxWidth="1200.0" minWidth="1200.0" prefWidth="1200.0">
+                  <VBox fx:id="scenePane" minWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
                         <Label text="Escena" textFill="#3d9ddb">
                            <font>
@@ -69,7 +69,7 @@
                            <children>
                               <VBox>
                                  <children>
-                                    <Label text="Cantidad de victimas" />
+                                    <Label text="Cantidad de víctimas" />
                                     <TextField fx:id="cantidadDeVictimasNumericField" />
                                  </children>
                               </VBox>
@@ -86,7 +86,7 @@
                               </VBox>
                               <VBox>
                                  <children>
-                                    <Label text="Acceso a la victima" />
+                                    <Label text="Acceso a la víctima" />
                                     <ChoiceBox fx:id="accesoAVictimaChoice" prefWidth="150.0" />
                                  </children>
                               </VBox>
@@ -106,7 +106,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </VBox>
-                  <VBox fx:id="personalBackgroundPane" maxWidth="1200.0" minWidth="1200.0" prefWidth="1200.0" translateX="1200.0">
+                  <VBox fx:id="personalBackgroundPane" minWidth="1000.0" translateX="1000.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
                         <Label text="Victima" textFill="#3d9ddb">
                            <font>
@@ -208,7 +208,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </VBox>
-                  <VBox fx:id="woundsPane" layoutX="-2.0" layoutY="1.0" maxWidth="1200.0" minWidth="1200.0" prefWidth="1200.0" translateX="1200.0">
+                  <VBox fx:id="woundsPane" layoutX="-2.0" layoutY="1.0" minWidth="1000.0" translateX="1000.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
                         <Label text="Síntomas" textFill="#3d9ddb">
                            <font>
@@ -250,7 +250,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </VBox>
-                  <VBox fx:id="airwayPane" maxWidth="1200.0" minWidth="1200.0" prefWidth="1200.0" translateX="1200.0">
+                  <VBox fx:id="airwayPane" minWidth="1000.0" translateX="1000.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
@@ -277,7 +277,7 @@
                         </VBox>
                      </children>
                   </VBox>
-                  <VBox fx:id="bleedingPane" maxWidth="1200.0" minWidth="1200.0" prefWidth="1200.0" translateX="1200.0">
+                  <VBox fx:id="bleedingPane" minWidth="1000.0" translateX="1000.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
@@ -329,7 +329,7 @@
                         </VBox>
                      </children>
                   </VBox>
-                  <VBox fx:id="burnPane" maxWidth="1200.0" minWidth="1200.0" prefWidth="1200.0" translateX="1200.0">
+                  <VBox fx:id="burnPane" minWidth="1000.0" translateX="1000.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
@@ -381,7 +381,7 @@
                         </VBox>
                      </children>
                   </VBox>
-                  <VBox fx:id="musclePane" maxWidth="1200.0" minWidth="1200.0" prefWidth="1200.0" translateX="1200.0">
+                  <VBox fx:id="musclePane" minWidth="1000.0" translateX="1000.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
@@ -430,4 +430,117 @@
          </content>
       </ScrollPane>
    </center>
+   <left>
+      <VBox minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox>
+               <children>
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #3d9ddb; -fx-text-fill: #ffffff;" text="Estado" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <VBox fx:id="estadoEscenaBox" visible="false">
+                           <children>
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: #3d9ddb;" text="Escena" textAlignment="CENTER">
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                              <Separator prefWidth="200.0" />
+                              <VBox fx:id="estadoEscenaContainer" />
+                              <Separator layoutX="10.0" layoutY="47.0" prefWidth="200.0" />
+                           </children>
+                        </VBox>
+                        <VBox fx:id="estadoVictimaBox" layoutX="10.0" layoutY="10.0" visible="false">
+                           <children>
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: #3d9ddb;" text="Víctima" textAlignment="CENTER">
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                              <Separator prefWidth="200.0" />
+                              <VBox fx:id="estadoVictimaContainer" />
+                              <Separator layoutX="10.0" layoutY="47.0" prefWidth="200.0" />
+                           </children>
+                        </VBox>
+                        <VBox fx:id="estadoLesionBox" layoutX="10.0" layoutY="10.0" visible="false">
+                           <children>
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: #3d9ddb;" text="Lesión" textAlignment="CENTER">
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                              <Separator prefWidth="200.0" />
+                              <VBox fx:id="estadoLesionContainer" />
+                              <Separator layoutX="10.0" layoutY="47.0" prefWidth="200.0" />
+                           </children>
+                        </VBox>
+                        <VBox fx:id="estadoViaAereaBox" layoutX="10.0" layoutY="10.0" visible="false">
+                           <children>
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: #3d9ddb;" text="Vía Aérea" textAlignment="CENTER">
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                              <Separator prefWidth="200.0" />
+                              <VBox fx:id="estadoViaAereaContainer" />
+                              <Separator layoutX="10.0" layoutY="47.0" prefWidth="200.0" />
+                           </children>
+                        </VBox>
+                        <VBox fx:id="estadoSangradoBox" layoutX="10.0" layoutY="10.0" visible="false">
+                           <children>
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: #3d9ddb;" text="Sangrado" textAlignment="CENTER">
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                              <Separator prefWidth="200.0" />
+                              <VBox fx:id="estadoSangradoContainer" />
+                              <Separator layoutX="10.0" layoutY="47.0" prefWidth="200.0" />
+                           </children>
+                        </VBox>
+                        <VBox fx:id="estadoQuemadurasBox" layoutX="10.0" layoutY="10.0" visible="false">
+                           <children>
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: #3d9ddb;" text="Quemaduras" textAlignment="CENTER">
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                              <Separator prefWidth="200.0" />
+                              <VBox fx:id="estadoQuemadurasContainer" />
+                              <Separator layoutX="10.0" layoutY="47.0" prefWidth="200.0" />
+                           </children>
+                        </VBox>
+                        <VBox fx:id="estadoLesionOsteoMuscularBox" layoutX="10.0" layoutY="10.0" visible="false">
+                           <children>
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: #3d9ddb;" text="Lesíon Osteo-Muscular" textAlignment="CENTER">
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                              <Separator prefWidth="200.0" />
+                              <VBox fx:id="estadoLesionOsteoMuscularContainer" />
+                              <Separator layoutX="10.0" layoutY="47.0" prefWidth="200.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </content>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </left>
 </BorderPane>

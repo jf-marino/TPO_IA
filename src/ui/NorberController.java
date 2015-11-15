@@ -3,19 +3,26 @@ package ui;
 import java.util.List;
 import java.util.Set;
 
+import javax.swing.GroupLayout.Alignment;
+
 import integracion.AppState;
 import integracion.ClipsHandler;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -28,6 +35,7 @@ public class NorberController implements Initializable {
 	private ClipsHandler clips = ClipsHandler.get();
 	
 	private int showLesionPane = -1;
+	
 	
 	@FXML
 	public ScrollPane mainScrollPane;
@@ -146,6 +154,40 @@ public class NorberController implements Initializable {
 	public TextField cantidadDeVictimasNumericField;
 	
 	
+	/**
+	 * Barra de estado
+	 */
+	@FXML
+	public VBox estadoEscenaBox;
+	@FXML
+	public VBox estadoVictimaBox;
+	@FXML
+	public VBox estadoLesionBox;
+	@FXML
+	public VBox estadoViaAereaBox;
+	@FXML
+	public VBox estadoSangradoBox;
+	@FXML
+	public VBox estadoQuemadurasBox;
+	@FXML
+	public VBox estadoLesionOsteoMuscularBox;
+	
+	@FXML
+	public VBox estadoEscenaContainer;
+	@FXML
+	public VBox estadoVictimaContainer;
+	@FXML
+	public VBox estadoLesionContainer;
+	@FXML
+	public VBox estadoViaAereaContainer;
+	@FXML
+	public VBox estadoSangradoContainer;
+	@FXML
+	public VBox estadoQuemadurasContainer;
+	@FXML
+	public VBox estadoLesionOsteoMuscularContainer;
+	
+	
 	
 	
 	@Override
@@ -160,17 +202,32 @@ public class NorberController implements Initializable {
 		TranslateTransition slideCurrent = new TranslateTransition(Duration.seconds(1), currentPane);
 		TranslateTransition slideNext = new TranslateTransition(Duration.seconds(1), nextPane);
 		
+		slideCurrent.setOnFinished(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent arg0) {
+            	currentPane.setVisible(false);
+            }
+        });
+		
 		slideCurrent.setFromX(0);
 		slideCurrent.setToX(-(rootAnchor.getWidth()));
 		slideNext.setFromX(rootAnchor.getWidth());
 		slideNext.setToX(0);
 		slideCurrent.play();
 		slideNext.play();
+		nextPane.setVisible(true);
 	}
 	
 	private void animatePanesRight(VBox currentPane, VBox nextPane) {
 		TranslateTransition slideCurrent = new TranslateTransition(Duration.seconds(1), currentPane);
 		TranslateTransition slideNext = new TranslateTransition(Duration.seconds(1), nextPane);
+		
+		slideCurrent.setOnFinished(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent arg0) {
+            	currentPane.setVisible(false);
+            }
+        });
 		
 		slideCurrent.setFromX(0);
 		slideCurrent.setToX(rootAnchor.getWidth());
@@ -178,6 +235,7 @@ public class NorberController implements Initializable {
 		slideNext.setToX(0);
 		slideCurrent.play();
 		slideNext.play();
+		nextPane.setVisible(true);
 	}
 	
 	private void slideLeft() {
@@ -185,6 +243,7 @@ public class NorberController implements Initializable {
 		switch(showingPane) {
 			case 0:
 				this.armarEstadoEscena();
+				this.setEstadoEscena();
 				this.clips.runEscena();
 				resultados = this.clips.resultadosEscena();
 				this.openResultWindow("Procedimiento", resultados);
@@ -194,6 +253,7 @@ public class NorberController implements Initializable {
 				break;
 			case 1:
 				this.armarEstadoVictima();
+				this.setEstadoVictima();
 				this.armarEstadoConvulsion();
 				this.clips.runVictima();
 				resultados = this.clips.resultadosVictima();
@@ -211,9 +271,12 @@ public class NorberController implements Initializable {
 					this.clips.runLesion();
 					resultados = this.clips.resultadosLesiones();
 					this.openResultWindow("Diagnostico sobre la lesíon", resultados);
+				} else {
+					this.openMessageWindow("Debe haber una lesión para poder continuar...");
 				}
 				switch(this.showLesionPane) {
 					case 1:
+						this.setEstadoLesion();
 						// show pane 3
 						animatePanesLeft(woundsPane, airwayPane);
 						this.showingPane = 3;
@@ -221,6 +284,7 @@ public class NorberController implements Initializable {
 						break;
 					case 2:
 						if(ubicacion > 0) {
+							this.setEstadoLesion();
 							// show pane 4
 							animatePanesLeft(woundsPane, bleedingPane);
 							this.showingPane = 4;
@@ -231,6 +295,7 @@ public class NorberController implements Initializable {
 						break;
 					case 3:
 						if(ubicacion > 0) {
+							this.setEstadoLesion();
 							// show pane 5
 							animatePanesLeft(woundsPane, burnPane);
 							this.showingPane = 5;
@@ -241,6 +306,7 @@ public class NorberController implements Initializable {
 						break;
 					case 4:
 						if(ubicacion > 0) {
+							this.setEstadoLesion();
 							// show pane 6
 							animatePanesLeft(woundsPane, musclePane);
 							this.showingPane = 6;
@@ -253,24 +319,28 @@ public class NorberController implements Initializable {
 				break;
 			case 3:
 				this.armarEstadoViaAerea();
+				this.setEstadoViaAerea();
 				this.clips.runViaAerea();
 				resultados = this.clips.resultadosViaAerea();
 				this.openResultWindow("Diagnostico sobre la vía aérea", resultados);
 				break;
 			case 4:
 				this.armarEstadoSangrado();
+				this.setEstadoSangrado();
 				this.clips.runSangrado();
 				resultados = this.clips.resultadosSangrado();
 				this.openResultWindow("Diagnostico sobre el sangrado", resultados);
 				break;
 			case 5:
 				this.armarEstadoQuemadura();
+				this.setEstadoQuemaduras();
 				this.clips.runQuemadura();
 				resultados = this.clips.resultadosQuemaduras();
 				this.openResultWindow("Diagnostico sobre quemaduras", resultados);
 				break;
 			case 6:
 				this.armarEstadoLesionOsteoMuscular();
+				this.setEstadoLesionOsteoMuscular();
 				this.clips.runLesionOsteoMuscular();
 				resultados = this.clips.resultadosLesionOsteoMuscular();
 				this.openResultWindow("Diagnostico sobre lesiones osteo-musculares", resultados);
@@ -522,15 +592,22 @@ public class NorberController implements Initializable {
 	    }
 	}
 	
+	
 	@FXML
 	private void reset() {
 		this.clips.reset();
 		AppState state = AppState.get();
 		state.reset();
 		this.setDefaultValues();
-		/*while(this.showingPane != 0) {
-			this.slideRight();
-		}*/
+		
+		this.resetEstadoEscena();
+		this.resetEstadoVictima();
+		this.resetEstadoLesion();
+		this.resetEstadoViaAerea();
+		this.resetEstadoSangrado();
+		this.resetEstadoQuemaduras();
+		this.resetEstadoLesionOsteoMuscular();
+		
 		nextPaneButton.setText("Siguiente");
 		switch(this.showingPane) {
 			case 0: break;
@@ -556,6 +633,189 @@ public class NorberController implements Initializable {
 		
 		this.showingPane = 0;
 		this.showLesionPane = -1;
+	}
+	
+	/**
+	 * Barra de estado
+	 */
+	private String _(CheckBox box) {
+		return box.isSelected() ? "Si" : "No";
+	}
+	
+	private void addStateField(String label, String state, VBox container) {
+		Label title = new Label(label);
+		Label value = new Label(state);
+		title.setStyle("-fx-font-fill: #b3b3b3;");
+		value.setStyle("-fx-font-weight: bold;");
+		title.setUnderline(true);
+		title.setPadding(new Insets(5.0));
+		value.setPadding(new Insets(5.0));
+		container.getChildren().add(title);
+		container.getChildren().add(value);
+	}
+	
+	private void setEstadoEscena() {
+		estadoEscenaContainer.getChildren().clear();
+		
+		String cantidadDeVictimas = this.cantidadDeVictimasNumericField.getText();
+		String curiosoPresente = _(this.curiosoPresenteCheck);
+		String seguridad = this.seguridadChoice.getSelectionModel().getSelectedItem();
+		String accesoVictima = this.accesoAVictimaChoice.getSelectionModel().getSelectedItem();
+		String dea = this.deaChoice.getSelectionModel().getSelectedItem();
+		
+		this.addStateField("Cantidad de víctimas", cantidadDeVictimas, estadoEscenaContainer);
+		this.addStateField("Curioso presente", curiosoPresente, estadoEscenaContainer);
+		this.addStateField("Seguridad", seguridad, estadoEscenaContainer);
+		this.addStateField("Acceso a la víctima", accesoVictima, estadoEscenaContainer);
+		this.addStateField("DEA", dea, estadoEscenaContainer);
+		
+		estadoEscenaBox.setVisible(true);
+	}
+	
+	private void resetEstadoEscena() {
+		estadoEscenaBox.setVisible(false);
+	}
+	
+	private void setEstadoVictima() {
+		estadoVictimaContainer.getChildren().clear();
+		
+		String edad = this.edadChoice.getSelectionModel().getSelectedItem();
+		String conciencia = this.concienciaChoice.getSelectionModel().getSelectedItem();
+		String respiracion = this.respiracionChoice.getSelectionModel().getSelectedItem();
+		String temperatura = this.temperaturaChoice.getSelectionModel().getSelectedItem();
+		String epilepsia = _(this.epilepsiaCheck);
+		String obstruccionViaAerea = this.obstruccionViaAereaChoice.getSelectionModel().getSelectedItem();
+		String comio = _(this.comioCheck);
+		String diabetes = _(this.diabetesCheck);
+		String insulinoDependiente = this.insulinoDependienteChoice.getSelectionModel().getSelectedItem();
+		String crisisDiabetica = _(this.crisisDiabeticaCheck);
+		String estadoConvulsion = this.estadoConvulsionChoice.getSelectionModel().getSelectedItem();
+		String epilepsiaConvulsion = _(this.epilepsiaConvulsionCheck);
+		String duracionConvulsion = this.duracionConvulsionNumericField.getText();
+		String ciclicaConvulsion = _(this.ciclicaConvulsionCheck);
+		String medicacionConvulsion = this.medicacionConvulsionChoice.getSelectionModel().getSelectedItem();
+		String fiebreConvulsion = _(this.fiebreConvulsionCheck);
+		
+		this.addStateField("Edad", edad, estadoVictimaContainer);
+		this.addStateField("Conciencia", conciencia, estadoVictimaContainer);
+		this.addStateField("Respiración", respiracion, estadoVictimaContainer);
+		this.addStateField("Temperatura", temperatura, estadoVictimaContainer);
+		this.addStateField("Epilepsia", epilepsia, estadoVictimaContainer);
+		this.addStateField("Obstrucción de la vía aérea", obstruccionViaAerea, estadoVictimaContainer);
+		this.addStateField("Comió", comio, estadoVictimaContainer);
+		this.addStateField("Diabetes", diabetes, estadoVictimaContainer);
+		this.addStateField("Insulino dependiente", insulinoDependiente, estadoVictimaContainer);
+		this.addStateField("Crisis diabetica", crisisDiabetica, estadoVictimaContainer);
+		this.addStateField("Estado de la convulsión", estadoConvulsion, estadoVictimaContainer);
+		this.addStateField("Epilepsia", epilepsiaConvulsion, estadoVictimaContainer);
+		this.addStateField("Duración", duracionConvulsion, estadoVictimaContainer);
+		this.addStateField("Cíclica", ciclicaConvulsion, estadoVictimaContainer);
+		this.addStateField("Medicación", medicacionConvulsion, estadoVictimaContainer);
+		this.addStateField("Fibre", fiebreConvulsion, estadoVictimaContainer);
+		
+		estadoVictimaBox.setVisible(true);
+	}
+	
+	private void resetEstadoVictima() {
+		estadoVictimaBox.setVisible(false);
+	}
+	
+	private void setEstadoLesion() {
+		estadoLesionContainer.getChildren().clear();
+		
+		String tipoSintoma = this.tipoSintomaChoice.getSelectionModel().getSelectedItem();
+		String ubicacionSintoma = this.ubicacionSintomaChoice.getSelectionModel().getSelectedItem();
+		
+		this.addStateField("Tipo", tipoSintoma, estadoLesionContainer);
+		this.addStateField("Ubicación", ubicacionSintoma, estadoLesionContainer);
+		
+		estadoLesionBox.setVisible(true);
+	}
+	
+	private void resetEstadoLesion() {
+		estadoLesionBox.setVisible(false);
+	}
+	
+	private void setEstadoViaAerea() {
+		estadoViaAereaContainer.getChildren().clear();
+		
+		String estadoViaAerea = this.estadoViaAereaChoice.getSelectionModel().getSelectedItem();
+		String cianosis = _(this.cianosisCheck);
+		
+		this.addStateField("Estado de la vía aérea", estadoViaAerea, estadoViaAereaContainer);
+		this.addStateField("Cianósis", cianosis, estadoViaAereaContainer);
+		
+		estadoViaAereaBox.setVisible(true);
+	}
+	
+	private void resetEstadoViaAerea() {
+		estadoViaAereaBox.setVisible(false);
+	}
+	
+	private void setEstadoSangrado() {
+		estadoSangradoContainer.getChildren().clear();
+		
+		String claseHeridaSangrado = this.claseHeridaSangradoChoice.getSelectionModel().getSelectedItem();
+		String profundidadSangrado = this.profundidadSangradoChoice.getSelectionModel().getSelectedItem();
+		String objetoExtranioSangrado = _(this.objetoExtranioSangradoCheck);
+		String tamanioSangrado = this.tamanioSangradoChoice.getSelectionModel().getSelectedItem();
+		String amputacionSangrado = _(this.amputacionSangradoCheck);
+		String tipoSangrado = this.tipoSangradoChoice.getSelectionModel().getSelectedItem();
+		
+		this.addStateField("Clase de herida", claseHeridaSangrado, estadoSangradoContainer);
+		this.addStateField("Profundidad", profundidadSangrado, estadoSangradoContainer);
+		this.addStateField("Objeto extraño", objetoExtranioSangrado, estadoSangradoContainer);
+		this.addStateField("Tamaño", tamanioSangrado, estadoSangradoContainer);
+		this.addStateField("Amputación", amputacionSangrado, estadoSangradoContainer);
+		this.addStateField("Tipo de sangrado", tipoSangrado, estadoSangradoContainer);
+		
+		estadoSangradoBox.setVisible(true);
+	}
+	
+	private void resetEstadoSangrado() {
+		estadoSangradoBox.setVisible(false);
+	}
+	
+	private void setEstadoQuemaduras() {
+		estadoQuemadurasContainer.getChildren().clear();
+		
+		String profundidadQuemadura = this.profundidadQuemaduraChoice.getSelectionModel().getSelectedItem();
+		String tejidoNecroso = _(this.tejidoNecrosoCheck);
+		String dolorQuemadura = this.dolorQuemaduraChoice.getSelectionModel().getSelectedItem();
+		String inflamacion = _(this.inflamacionCheck);
+		String tamanioQuemadura = this.tamanioQuemaduraChoice.getSelectionModel().getSelectedItem();
+		String tipoQuemadura = this.tipoQuemaduraChoice.getSelectionModel().getSelectedItem();
+		
+		this.addStateField("Profundidad", profundidadQuemadura, estadoQuemadurasContainer);
+		this.addStateField("Tejido necroso", tejidoNecroso, estadoQuemadurasContainer);
+		this.addStateField("Dolor", dolorQuemadura, estadoQuemadurasContainer);
+		this.addStateField("Inflamación", inflamacion, estadoQuemadurasContainer);
+		this.addStateField("Tamaño", tamanioQuemadura, estadoQuemadurasContainer);
+		this.addStateField("Tipo", tipoQuemadura, estadoQuemadurasContainer);
+		
+		estadoQuemadurasBox.setVisible(true);
+	}
+	
+	private void resetEstadoQuemaduras() {
+		estadoQuemadurasBox.setVisible(false);
+	}
+	
+	private void setEstadoLesionOsteoMuscular() {
+		estadoLesionOsteoMuscularContainer.getChildren().clear();
+		
+		String claseLesionOsteoMuscular = this.claseLesionOsteoMuscularChoice.getSelectionModel().getSelectedItem();
+		String afeccionPartesBlandas = this.afeccionPartesBlandasChoice.getSelectionModel().getSelectedItem();
+		String afeccionPartesOseas = this.afeccionPartesOseasChoice.getSelectionModel().getSelectedItem();
+		
+		this.addStateField("Clase de lesión osteo-muscular", claseLesionOsteoMuscular, estadoLesionOsteoMuscularContainer);
+		this.addStateField("Afección de las partes blandas", afeccionPartesBlandas, estadoLesionOsteoMuscularContainer);
+		this.addStateField("Afección de las partes oseas", afeccionPartesOseas, estadoLesionOsteoMuscularContainer);
+				
+		estadoLesionOsteoMuscularBox.setVisible(true);
+	}
+	
+	private void resetEstadoLesionOsteoMuscular() {
+		estadoLesionOsteoMuscularBox.setVisible(false);
 	}
 
 }
