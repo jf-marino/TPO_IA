@@ -1,7 +1,5 @@
 package integracion;
 
-import javafx.collections.FXCollections;
-
 public class Translator {
 	
 	private static Translator instance;

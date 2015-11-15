@@ -10,6 +10,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import utils.NumericField?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="1200.0" minHeight="-Infinity" minWidth="1200.0" prefHeight="551.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NorberController">
    <top>
@@ -70,7 +71,7 @@
                               <VBox>
                                  <children>
                                     <Label text="Cantidad de víctimas" />
-                                    <TextField fx:id="cantidadDeVictimasNumericField" />
+                                    <NumericField fx:id="cantidadDeVictimasNumericField" maxWidth="-Infinity" prefWidth="150.0" />
                                  </children>
                               </VBox>
                               <VBox>
@@ -142,7 +143,7 @@
                                           <ChoiceBox fx:id="temperaturaChoice" prefWidth="150.0" />
                                        </children>
                                     </VBox>
-                                    <CheckBox fx:id="epilepsiaCheck" mnemonicParsing="false" text="Epilepsia" />
+                                    <CheckBox fx:id="epilepsiaCheck" mnemonicParsing="false" text="Epilepsia" visible="false" />
                                  </children>
                               </VBox>
                               <VBox spacing="15.0">
@@ -179,8 +180,8 @@
                                           <CheckBox fx:id="epilepsiaConvulsionCheck" mnemonicParsing="false" text="Epilepsia" />
                                           <VBox>
                                              <children>
-                                                <Label text="Duración" />
-                                                <TextField fx:id="duracionConvulsionNumericField" />
+                                                <Label text="Duración (en minutos)" />
+                                                <NumericField fx:id="duracionConvulsionNumericField" maxWidth="-Infinity" prefWidth="150.0"/>
                                              </children>
                                           </VBox>
                                           <CheckBox fx:id="ciclicaConvulsionCheck" mnemonicParsing="false" text="Cíclica" />

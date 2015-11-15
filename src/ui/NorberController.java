@@ -1,9 +1,6 @@
 package ui;
 
-import java.util.List;
 import java.util.Set;
-
-import javax.swing.GroupLayout.Alignment;
 
 import integracion.AppState;
 import integracion.ClipsHandler;
@@ -15,18 +12,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import utils.NumericField;
 
 public class NorberController implements Initializable {
 	
@@ -86,8 +80,6 @@ public class NorberController implements Initializable {
 	public ChoiceBox<String> estadoViaAereaChoice;
 	@FXML
 	public TextField duracionConvulsionNumericField;
-	@FXML
-	public CheckBox epilepsiaCheck;
 	@FXML
 	public ChoiceBox<String> claseLesionOsteoMuscularChoice;
 	@FXML
@@ -192,7 +184,6 @@ public class NorberController implements Initializable {
 	
 	@Override
 	public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
-		System.out.println("Inicializando a Norber...");
 		mainScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
 		this.initializeValues();
 		this.setDefaultValues();
@@ -442,7 +433,7 @@ public class NorberController implements Initializable {
 		medicacionConvulsionChoice.getSelectionModel().selectFirst();
 		estadoViaAereaChoice.getSelectionModel().selectFirst();
 		duracionConvulsionNumericField.setText("0");
-		epilepsiaCheck.setSelected(false);
+		//epilepsiaCheck.setSelected(false);
 		claseLesionOsteoMuscularChoice.getSelectionModel().selectFirst();
 		concienciaChoice.getSelectionModel().selectFirst();
 		crisisDiabeticaCheck.setSelected(false);
@@ -496,7 +487,7 @@ public class NorberController implements Initializable {
 		state.conciencia = this.concienciaChoice.getSelectionModel().getSelectedIndex();
 		state.respiracion = this.respiracionChoice.getSelectionModel().getSelectedIndex();
 		state.temperatura = this.temperaturaChoice.getSelectionModel().getSelectedIndex();
-		state.epilepsia = $(this.epilepsiaCheck);
+		//state.epilepsia = $(this.epilepsiaCheck);
 		state.obstruccionViaAerea = this.obstruccionViaAereaChoice.getSelectionModel().getSelectedIndex();
 		state.comio = $(this.comioCheck);
 		state.diabetes = $(this.diabetesCheck);
@@ -638,7 +629,7 @@ public class NorberController implements Initializable {
 	/**
 	 * Barra de estado
 	 */
-	private String _(CheckBox box) {
+	private String boolToString(CheckBox box) {
 		return box.isSelected() ? "Si" : "No";
 	}
 	
@@ -658,7 +649,7 @@ public class NorberController implements Initializable {
 		estadoEscenaContainer.getChildren().clear();
 		
 		String cantidadDeVictimas = this.cantidadDeVictimasNumericField.getText();
-		String curiosoPresente = _(this.curiosoPresenteCheck);
+		String curiosoPresente = boolToString(this.curiosoPresenteCheck);
 		String seguridad = this.seguridadChoice.getSelectionModel().getSelectedItem();
 		String accesoVictima = this.accesoAVictimaChoice.getSelectionModel().getSelectedItem();
 		String dea = this.deaChoice.getSelectionModel().getSelectedItem();
@@ -683,24 +674,24 @@ public class NorberController implements Initializable {
 		String conciencia = this.concienciaChoice.getSelectionModel().getSelectedItem();
 		String respiracion = this.respiracionChoice.getSelectionModel().getSelectedItem();
 		String temperatura = this.temperaturaChoice.getSelectionModel().getSelectedItem();
-		String epilepsia = _(this.epilepsiaCheck);
+		//String epilepsia = boolToString(this.epilepsiaCheck);
 		String obstruccionViaAerea = this.obstruccionViaAereaChoice.getSelectionModel().getSelectedItem();
-		String comio = _(this.comioCheck);
-		String diabetes = _(this.diabetesCheck);
+		String comio = boolToString(this.comioCheck);
+		String diabetes = boolToString(this.diabetesCheck);
 		String insulinoDependiente = this.insulinoDependienteChoice.getSelectionModel().getSelectedItem();
-		String crisisDiabetica = _(this.crisisDiabeticaCheck);
+		String crisisDiabetica = boolToString(this.crisisDiabeticaCheck);
 		String estadoConvulsion = this.estadoConvulsionChoice.getSelectionModel().getSelectedItem();
-		String epilepsiaConvulsion = _(this.epilepsiaConvulsionCheck);
+		String epilepsiaConvulsion = boolToString(this.epilepsiaConvulsionCheck);
 		String duracionConvulsion = this.duracionConvulsionNumericField.getText();
-		String ciclicaConvulsion = _(this.ciclicaConvulsionCheck);
+		String ciclicaConvulsion = boolToString(this.ciclicaConvulsionCheck);
 		String medicacionConvulsion = this.medicacionConvulsionChoice.getSelectionModel().getSelectedItem();
-		String fiebreConvulsion = _(this.fiebreConvulsionCheck);
+		String fiebreConvulsion = boolToString(this.fiebreConvulsionCheck);
 		
 		this.addStateField("Edad", edad, estadoVictimaContainer);
 		this.addStateField("Conciencia", conciencia, estadoVictimaContainer);
 		this.addStateField("Respiración", respiracion, estadoVictimaContainer);
 		this.addStateField("Temperatura", temperatura, estadoVictimaContainer);
-		this.addStateField("Epilepsia", epilepsia, estadoVictimaContainer);
+		//this.addStateField("Epilepsia", epilepsia, estadoVictimaContainer);
 		this.addStateField("Obstrucción de la vía aérea", obstruccionViaAerea, estadoVictimaContainer);
 		this.addStateField("Comió", comio, estadoVictimaContainer);
 		this.addStateField("Diabetes", diabetes, estadoVictimaContainer);
@@ -708,7 +699,7 @@ public class NorberController implements Initializable {
 		this.addStateField("Crisis diabetica", crisisDiabetica, estadoVictimaContainer);
 		this.addStateField("Estado de la convulsión", estadoConvulsion, estadoVictimaContainer);
 		this.addStateField("Epilepsia", epilepsiaConvulsion, estadoVictimaContainer);
-		this.addStateField("Duración", duracionConvulsion, estadoVictimaContainer);
+		this.addStateField("Duración (en minutos)", duracionConvulsion, estadoVictimaContainer);
 		this.addStateField("Cíclica", ciclicaConvulsion, estadoVictimaContainer);
 		this.addStateField("Medicación", medicacionConvulsion, estadoVictimaContainer);
 		this.addStateField("Fibre", fiebreConvulsion, estadoVictimaContainer);
@@ -740,7 +731,7 @@ public class NorberController implements Initializable {
 		estadoViaAereaContainer.getChildren().clear();
 		
 		String estadoViaAerea = this.estadoViaAereaChoice.getSelectionModel().getSelectedItem();
-		String cianosis = _(this.cianosisCheck);
+		String cianosis = boolToString(this.cianosisCheck);
 		
 		this.addStateField("Estado de la vía aérea", estadoViaAerea, estadoViaAereaContainer);
 		this.addStateField("Cianósis", cianosis, estadoViaAereaContainer);
@@ -757,9 +748,9 @@ public class NorberController implements Initializable {
 		
 		String claseHeridaSangrado = this.claseHeridaSangradoChoice.getSelectionModel().getSelectedItem();
 		String profundidadSangrado = this.profundidadSangradoChoice.getSelectionModel().getSelectedItem();
-		String objetoExtranioSangrado = _(this.objetoExtranioSangradoCheck);
+		String objetoExtranioSangrado = boolToString(this.objetoExtranioSangradoCheck);
 		String tamanioSangrado = this.tamanioSangradoChoice.getSelectionModel().getSelectedItem();
-		String amputacionSangrado = _(this.amputacionSangradoCheck);
+		String amputacionSangrado = boolToString(this.amputacionSangradoCheck);
 		String tipoSangrado = this.tipoSangradoChoice.getSelectionModel().getSelectedItem();
 		
 		this.addStateField("Clase de herida", claseHeridaSangrado, estadoSangradoContainer);
@@ -780,9 +771,9 @@ public class NorberController implements Initializable {
 		estadoQuemadurasContainer.getChildren().clear();
 		
 		String profundidadQuemadura = this.profundidadQuemaduraChoice.getSelectionModel().getSelectedItem();
-		String tejidoNecroso = _(this.tejidoNecrosoCheck);
+		String tejidoNecroso = boolToString(this.tejidoNecrosoCheck);
 		String dolorQuemadura = this.dolorQuemaduraChoice.getSelectionModel().getSelectedItem();
-		String inflamacion = _(this.inflamacionCheck);
+		String inflamacion = boolToString(this.inflamacionCheck);
 		String tamanioQuemadura = this.tamanioQuemaduraChoice.getSelectionModel().getSelectedItem();
 		String tipoQuemadura = this.tipoQuemaduraChoice.getSelectionModel().getSelectedItem();
 		

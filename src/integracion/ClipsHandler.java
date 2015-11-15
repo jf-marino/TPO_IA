@@ -1,10 +1,8 @@
 package integracion;
 
-import java.util.List;
 import java.util.Set;
 
 import net.sf.clipsrules.jni.Environment;
-import net.sf.clipsrules.jni.PrimitiveValue;
 import utils.ResultReader;
 
 public class ClipsHandler {
@@ -107,7 +105,14 @@ public class ClipsHandler {
 		this.closeSangradoFile();
 		this.closeQuemadurasFile();
 		this.closeLesionOsteoMuscularFile();
-		System.out.println("Closed all target files.");
+		
+		clips.eval("(remove \"outputEscena.txt\")");
+		clips.eval("(remove \"outputVictima.txt\")");
+		clips.eval("(remove \"outputLesion.txt\")");
+		clips.eval("(remove \"outputViaAerea.txt\")");
+		clips.eval("(remove \"outputSangrado.txt\")");
+		clips.eval("(remove \"outputQuemaduras.txt\")");
+		clips.eval("(remove \"outputLesionOsteoMuscular.txt\")");
 	}
 	
 	private void openEscenaFile() {

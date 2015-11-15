@@ -65,10 +65,7 @@ public class ResultsController  implements Initializable {
 	}
 	
 	public void initData(Set<String> resultados) {
-		System.out.println("ResultsController =>");
 		for(String resultado : resultados) {
-			// Agregar imagenes
-			System.out.println(String.format("Showing image %s", imageMap.get(resultado)));
 			ImageView iv = new ImageView();
 			iv.setImage(new Image(imageMap.get(resultado)));
 			resultsVBox.getChildren().add(iv);
